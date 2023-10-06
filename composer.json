@@ -1,0 +1,9 @@
+{
+    "name": "long/quanlyhs",
+    "description": "du an khkt",
+    "type": "project",
+    "require": {
+        "codeigniter4/framework": "^4.4",
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}

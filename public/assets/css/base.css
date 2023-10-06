@@ -1,0 +1,17 @@
+:root {
+    --color1: #ffcc70;
+    --color2: #fffadd;
+    --color3: #8ecddd;
+    --color4: #22668d;
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url(./linux_libertine/LinLibertine_R.ttf);
+}
+
+html, body {
+    margin: 0;
+    font-family: 'Linux Libertine', Georgia, 'Times New Roman', Times, serif;
+    color: var(--color4);
+}

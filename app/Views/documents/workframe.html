@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${document_title}</title>
+</head>
+<style>
+    header {
+        background: red;
+    }
+
+    .sidebar {
+        background: green;
+        width: 25%;
+        min-width: 100px;
+    }
+
+    .selected {
+        color: white;
+    }
+</style>
+<body>
+    <header>This is a nice header</header>
+    <div class="sidebar">
+        ${sidebar_content}
+    </div>
+    <div class="work">
+        ${work_content}
+    </div>
+</body>
+</html>
