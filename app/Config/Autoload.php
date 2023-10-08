@@ -46,6 +46,7 @@ class Autoload extends AutoloadConfig
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
         'PhpOffice'   => ROOTPATH . 'vendor/phpoffice/phpspreadsheet/src',
+        'QuanLyHocSinh' => APPPATH . 'Libraries/QuanLyHocSinh',
     ];
 
     /**
