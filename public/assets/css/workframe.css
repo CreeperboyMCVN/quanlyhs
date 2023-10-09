@@ -9,9 +9,11 @@ html, body {
 .menu {
     background-color: #1b0bf9;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
 }
 
-.menu a {
+.menu nav a {
     font-size: 22px;
     float: left;
     display: block;
@@ -21,7 +23,16 @@ html, body {
     text-decoration: none;
 }
 
-.menu a:hover {
+.menu .user-point {
+    color: #f1f1f1;
+    margin: 1em;
+}
+
+.menu .user-point a {
+    color: rgb(229, 255, 0);
+}
+
+.menu nav a:hover {
     background-color: #10112c;
     color: rgb(229, 255, 0);
 }
@@ -36,6 +47,7 @@ footer {
 .container {
 	display: flex;
 	height: 90%;
+        
 }
 
 .function-group {
@@ -57,15 +69,30 @@ footer {
     width: auto;
 }
 
+.function-item-label {
+    margin-left: 0.5em;
+}
+
 .function-item:hover {
     background: #f1f1f1;
 }
 
-.function-item a {
+.selected {
+    background: #f1f1f1;
+    border-width: 0 0 0 5px;
+    border-style: solid;
+    border-color: rgb(229, 255, 0);
+}
+
+.function-group a {
     color: #333;
     text-decoration: none;
 }
 
-.function-item a:hover {
+.function-group a:hover {
     text-decoration: underline;
+}
+
+.action-wrapper {
+    padding: 1em;
 }

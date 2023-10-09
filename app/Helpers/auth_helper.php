@@ -56,3 +56,19 @@ function generatePassword($password):string {
     $pwd = hash('sha256', $hash . $salt);
     return $pwd . '$' . $salt;
 }
+
+function validSession($username, $secert) {
+    $db = db_connect();
+    $query = $db->query('SELECT `secert` FROM `qlhs_users` WHERE `username`="'.$username.'"');
+    $sc = $query->getFirstRow()->secert;
+    return $secert == $sc;
+}
+
+function newSession($username) {
+    $secert = randomString(32);
+    $db = db_connect();
+
+    $db->query('UPDATE `qlhs_users` SET `secert`="'.$secert.'" WHERE `username`="admin"');
+
+    session()->set(["secert" => $secert, "username" => 'admin', 'code' => 0]);
+}

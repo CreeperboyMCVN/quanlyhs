@@ -21,7 +21,7 @@ class User {
         $this->database = db_connect();
     }
 
-    public function getUrlFormPageData() {
+    public function getPageData() {
         $pageData = [];
         if ($this->window != $this->def_window) {
             $pageData = array_merge($pageData, ["window" => $this->window]);
@@ -35,16 +35,47 @@ class User {
         if ($this->max != $this->def_max) {
             $pageData = array_merge($pageData, ["max" => $this->max]);
         }
-        return arrayToUrlFormEncoded($pageData);
+        return $pageData;
     }
 
     public function getPermissions() {
         $query = $this->database->query('SELECT `permission` FROM `qlhs_users` WHERE `username`="'.$this->username.'"');
         //echo var_dump($query);
-        return explode(',', $query->getFirstRow()->permission);
+        $arr = explode(',', $query->getFirstRow()->permission);
+        if (in_array('*', $arr)) {
+            return ['*' => '*'];
+        }
+        $res = [];
+        foreach ($arr as $value) {
+            $arr2 = explode("-", $value);
+            if (count($arr) == 1) {
+                $res = array_merge($res, [$arr2[0] => 'r']);
+            } else {
+                $res = array_merge($res, [$arr2[0] => $arr2[1]]);
+            }
+        }
+        return $res;
     }
 
-    public function hasPermission($perm):bool {
-        return in_array('*', getPermissions()) || in_array($perm, getPermissions());
+    public function hasPermission($perm, $rw):bool {
+        $perms = $this->getPermissions();
+        foreach ($perms as $k => $v) {
+            if ($k == '*') return true;
+            if ($k == $perm) {
+                
+                return ($v == $rw) || $v == '*';
+            }
+        }
+        return false;
+    }
+
+    public function getSideBar() {
+        $sidebar = new SidebarParser($this);
+        return $sidebar->parse();
+    }
+    
+    public function getActionWindow() {
+        $aw = new StudentListWindow($this);
+        return $aw->getWindow();
     }
 }

@@ -19,7 +19,7 @@ class Home extends BaseController
         // redirect if auth success
         if (isset($code)) {
             if ($code == 0) {
-                $session->set(['username' => $username, 'code' => 0]);
+                newSession($username);
                 return redirect('app');
             } else $session->set(['code' => $code]);
         }
@@ -33,5 +33,9 @@ class Home extends BaseController
 
     public function spreadsheet() {
         return view('spreadsheetapi');
+    }
+    
+    public function setup() {
+        return view('setup');
     }
 }

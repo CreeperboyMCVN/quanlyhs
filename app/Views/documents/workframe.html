@@ -7,43 +7,31 @@
     <title>Quản lý học sinh</title>
     <link rel="stylesheet" href="assets/css/workframe.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="./js/jquery/jquery.min.js"></script>
+    <script src="./js/qlhs/app.js"></script>
 </head>
 <body>
+    <input type="hidden" name="secert" id="secert-key" value="${secert_key}">
+    <input type="hidden" name="username" id="username" value="${username}">
     <div class="menu">
-        <a href="#">Trang chủ</a>
-        <a href="#">Giới thiệu</a>
-        <a href="#">Trợ giúp</a>
+        <nav>
+            <a href="#">Trang chủ</a>
+            <a href="#">Giới thiệu</a>
+            <a href="#">Trợ giúp</a>
+        </nav>
+        <div class='user-point'>
+            Xin chào, ${username}! <a href='./logout'>Đăng xuất</a>
+        </div>
+         
+        
     </div>
     <div class="container">
     	<section class="function-group">
-		      <div class="function-item">
-			  <a href="#">
-			      <i class="fa-solid fa-users"></i>
-			      Danh sách học sinh
-			  </a>
-		      </div>
-		      <div class="function-item">
-			  <a href="#">
-			      <i class="fa-solid fa-chalkboard-teacher"></i>
-			      Danh sách giáo viên
-			  </a>
-		      </div>
-		      <div class="function-item">
-			  <a href="#">
-			      <i class="fa-solid fa-exclamation-triangle"></i>
-			      Các vi phạm 
-			  </a>
-		      </div>
-		      <div class="function-item">
-			  <a href="#">
-			      <i class="fa-solid fa-check-circle"></i>
-			      Học sinh vi phạm
-			  </a>
-		      </div>
+		      ${sidebar}
 		 </section>
-		 <section>
-			 iugiygyiutgiuty
-			 </section>
+		 <section class="action-wrapper">
+			 ${action_window}
+		</section>
     </div>
     <table>
     	<tr>

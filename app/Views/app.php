@@ -19,12 +19,18 @@ if (isset($_GET['max'])) {
     $user->max = $_GET['max'];
 }
 
+//echo var_dump($user->getPermissions());
 
 
 $workframe = view('documents/workframe.html');
 
 if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'document_title', 'Test');
+    $workframe = placeholder($workframe, 'sidebar', $user->getSideBar());
+    $workframe = placeholder($workframe, 'username', $user->username);
+    $workframe = placeholder($workframe, 'secert_key', session()->secert);
+    $workframe = placeholder($workframe, 'action_window', $user->getActionWindow());
+    $workframe = placeholder($workframe, 'max', $user->max);
 }
 
 //echo var_dump($user->getUrlFormPageData());

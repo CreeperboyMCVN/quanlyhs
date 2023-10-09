@@ -10,6 +10,8 @@ function resolveErrorCode($code) {
             return "Quyền truy cập bị từ chối!";
         case 3:
             return "Vui lòng nhập tên người dùng";
+        case 4:
+            return "Phiên đã hết hạn!";
         
         default:
             # code...

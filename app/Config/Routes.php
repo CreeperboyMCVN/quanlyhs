@@ -12,3 +12,4 @@ $routes->post('/app', '\App\Controllers\App::index');
 $routes->get('/logout', 'Home::logout' );
 $routes->post('/spreadsheet', 'Home::spreadsheet');
 $routes->get('/spreadsheet', 'Home::spreadsheet');
+$routes->get('/setup', 'Home::setup');

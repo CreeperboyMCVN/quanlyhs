@@ -1,3 +1,4 @@
 tests/
 writable/
 vendor/
+/nbproject/private/
