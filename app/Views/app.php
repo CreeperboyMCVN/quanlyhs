@@ -31,6 +31,9 @@ if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'secert_key', session()->secert);
     $workframe = placeholder($workframe, 'action_window', $user->getActionWindow());
     $workframe = placeholder($workframe, 'max', $user->max);
+    $workframe = placeholder($workframe, 'user_window', $user->window);
+    $workframe = placeholder($workframe, 'user_action', $user->action);
+    $workframe = placeholder($workframe, 'user_page', $user->page);
 }
 
 //echo var_dump($user->getUrlFormPageData());

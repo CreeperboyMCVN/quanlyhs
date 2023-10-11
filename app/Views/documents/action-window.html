@@ -1,18 +1,30 @@
 <div class="pages">${pages}</div>
 <div class='edit'>
-    <input type="button" value="Xuất" />
-    <input type="button" value="Nhập" />
-    <input type="button" value="Lọc" />
+    <button>Xuất</button>
+    <button>Nhập</button>
+    <button>Lọc</button>
 </div>
+<div class="filter-overlay"></div>
 <div class='filter-popup'>
+    
+    <h4 class="filter-label">Lọc danh sách</h4>
     <form action="" method="get">
-        <div class="max">
-            Hiển thị <input type="number" min='1' max='50' value='${max}' /> phần tử 1 trang.
+        <input type="hidden" name="window" value="${user_window}"/>
+        <input type="hidden" name="action" value="${user_action}"/>
+        <input type="hidden" name="page" value="${user_page}"/>
+        <div class="max filter-section">
+            Hiển thị <input type="number" min='1' max='50' value='${max}' name="max"/> phần tử 1 trang.
         </div>
-        <div class='search'>
+        <div class='search filter-section'>
             Tìm kiếm
             <input type="text" name="search" placeholder="Bỏ trống để bỏ qua">
         </div>
-        
+        <div class="date filter-section">
+            Từ ngày <input type="date" name="date-start" id="date-start"> đến <input type="date" name="date-end" id="date-end">
+        </div>
+        <div class="confirm filter-section">
+            <button type="button">Hủy bỏ</button>
+            <button type="submit">Xác nhận</button>
+        </div>
     </form>
 </div>
