@@ -95,6 +95,7 @@ footer {
 
 .action-wrapper {
     padding: 1em;
+    width: 80%;
 }
 
 .filter-popup {
@@ -137,4 +138,22 @@ button {
 
 button:hover {
     background: #110893;
+}
+
+.data-table {
+    margin-top: 1em;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table tr th {
+    background: #acabab;
+}
+
+.data-table tr.table-even {
+    background: #e2e1e1;
+}
+
+.data-table tr.table-odd {
+    background: #d0cece;
 }

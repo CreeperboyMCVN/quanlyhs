@@ -6,3 +6,15 @@ $(document).ready(function($) {
     
     
 })
+
+$('.close-filter').click(function (e) { 
+    e.preventDefault();
+    $('.filter-popup').hide();
+    $('.filter-overlay').hide();
+});
+
+$('.open-filter').click(function (e) { 
+    e.preventDefault();
+    $('.filter-popup').show();
+    $('.filter-overlay').show();
+});

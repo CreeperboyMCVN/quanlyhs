@@ -75,7 +75,13 @@ class User {
     }
     
     public function getActionWindow() {
-        $aw = new StudentListWindow($this);
+        $aw = null;
+
+        if ($this->action == 'students') {
+            $aw = new StudentListWindow($this);
+        }
+        
+        if ($aw == null) return '';
         return $aw->getWindow();
     }
 }

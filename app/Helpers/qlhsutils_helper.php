@@ -11,7 +11,7 @@ function resolveErrorCode($code) {
         case 3:
             return "Vui lòng nhập tên người dùng";
         case 4:
-            return "Phiên đã hết hạn!";
+            return "Phiên đã hết hạn hoặc bạn đã đăng nhập trên thiết bị khác!";
         
         default:
             # code...

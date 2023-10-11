@@ -13,6 +13,7 @@ class StudentListWindow extends ActionWindow {
     
     public function getWindow() {
         $view = view('documents/action-window.html');
+        
         return $view;
     }
 }
