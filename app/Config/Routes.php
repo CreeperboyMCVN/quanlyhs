@@ -13,3 +13,4 @@ $routes->get('/logout', 'Home::logout' );
 $routes->post('/spreadsheet', 'Home::spreadsheet');
 $routes->get('/spreadsheet', 'Home::spreadsheet');
 $routes->get('/setup', 'Home::setup');
+$routes->post('/data', 'Home::data');

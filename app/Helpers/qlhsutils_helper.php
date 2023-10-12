@@ -12,7 +12,10 @@ function resolveErrorCode($code) {
             return "Vui lòng nhập tên người dùng";
         case 4:
             return "Phiên đã hết hạn hoặc bạn đã đăng nhập trên thiết bị khác!";
-        
+        case 5:
+            return "Vui lòng xác định bảng dữ liệu!";
+        case 6:
+            return "Không đủ tham số!";
         default:
             # code...
             return "Lỗi không xác định!";

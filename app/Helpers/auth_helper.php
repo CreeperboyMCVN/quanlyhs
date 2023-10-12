@@ -60,6 +60,7 @@ function generatePassword($password):string {
 function validSession($username, $secert) {
     $db = db_connect();
     $query = $db->query('SELECT `secert` FROM `qlhs_users` WHERE `username`="'.$username.'"');
+    if ($query->getNumRows() == 0) return false;
     $sc = $query->getFirstRow()->secert;
     return $secert == $sc;
 }

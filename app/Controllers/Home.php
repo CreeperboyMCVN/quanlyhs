@@ -38,4 +38,8 @@ class Home extends BaseController
     public function setup() {
         return view('setup');
     }
+
+    public function data() {
+        return view('data');
+    }
 }

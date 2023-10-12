@@ -148,6 +148,7 @@ button:hover {
 
 .data-table tr th {
     background: #acabab;
+    text-align: center;
 }
 
 .data-table tr.table-even {
@@ -156,4 +157,30 @@ button:hover {
 
 .data-table tr.table-odd {
     background: #d0cece;
+}
+
+.table-wrapper {
+    text-align: center;
+}
+
+.table-wrapper .data-table {
+    text-align: left;
+}
+
+.pages ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+.page-selected {
+    background-color: #10112c;
+    color: rgb(229, 255, 0);
+}
+
+.set-page {
+    width: 30px;
+}
+
+.filter-section input[type=text] {
+    width: 100px;
 }

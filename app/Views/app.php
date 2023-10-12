@@ -35,7 +35,6 @@ if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'max', $user->max);
     $workframe = placeholder($workframe, 'user_window', $user->window);
     $workframe = placeholder($workframe, 'user_action', $user->action);
-    $workframe = placeholder($workframe, 'user_page', $user->page);
     //$workframe = placeholder($workframe, 'table_content', $table->getTable());
 }
 
