@@ -29,10 +29,9 @@ $workframe = view('documents/workframe.html');
 if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'document_title', 'Test');
     $workframe = placeholder($workframe, 'sidebar', $user->getSideBar());
-    $workframe = placeholder($workframe, 'username', $user->username);
-    $workframe = placeholder($workframe, 'secert_key', session()->secert);
     $workframe = placeholder($workframe, 'action_window', $user->getActionWindow());
     $workframe = placeholder($workframe, 'max', $user->max);
+    $workframe = placeholder($workframe, 'username', $user->username);
     $workframe = placeholder($workframe, 'user_window', $user->window);
     $workframe = placeholder($workframe, 'user_action', $user->action);
     //$workframe = placeholder($workframe, 'table_content', $table->getTable());

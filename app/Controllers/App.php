@@ -7,14 +7,14 @@ class App extends BaseController
     public function index()
     {
         $session = session();
-        //echo $session->username;
-        if ($session->username == NULL) return redirect('/');
-        if (!validSession($session->username, $session->secert)) {
-            $session->set(['code' => 4]);
-            $session->remove('username');
-            $session->remove('secert');
-            return redirect('/');
+        if (isset($_COOKIE['qlhs_user_token'])) {
+            if (!validSession($_COOKIE['qlhs_user_name'], $_COOKIE['qlhs_user_token'])) {
+                $session->set(['code' => 4]);
+                delete_cookie('qlhs_user_token');
+                return redirect('/');
+            }
         }
+        
         //return view('app');
         return view('app');
     }

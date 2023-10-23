@@ -8,6 +8,10 @@ class Home extends BaseController
     {
         helper('auth');
         $session = session();
+        if (isset($_COOKIE['qlhs_user_token'])) {
+            $name = $_COOKIE['qlhs_user_name'];
+            if (validSession($name, $_COOKIE['qlhs_user_token'])) return redirect('app');
+        }
         if (isset($session->username)) return redirect('app');
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
@@ -15,6 +19,7 @@ class Home extends BaseController
         }
 
         // auth
+        
         if (isset($username) && isset($password)) $code = auth($username, $password);
         // redirect if auth success
         if (isset($code)) {
@@ -28,6 +33,8 @@ class Home extends BaseController
 
     public function logout() {
         session()->destroy();
+        delete_cookie('qlhs_user_token');
+        delete_cookie('qlhs_user_name');
         return redirect('/');
     }
 

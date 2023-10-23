@@ -57,19 +57,38 @@ function generatePassword($password):string {
     return $pwd . '$' . $salt;
 }
 
-function validSession($username, $secert) {
+function validSession($username, $token) {
     $db = db_connect();
-    $query = $db->query('SELECT `secert` FROM `qlhs_users` WHERE `username`="'.$username.'"');
-    if ($query->getNumRows() == 0) return false;
-    $sc = $query->getFirstRow()->secert;
-    return $secert == $sc;
+    $res = $db->query('SELECT `token` FROM `qlhs_token` WHERE `user`="'. $username .'"');
+    if ($res->getNumRows() == 0) {
+        return false;
+    }
+    foreach ($res->getResult() as $value) {
+        # code...
+        if ($token == $value->token) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 function newSession($username) {
-    $secert = randomString(32);
+    $token = randomString(32);
     $db = db_connect();
 
-    $db->query('UPDATE `qlhs_users` SET `secert`="'.$secert.'" WHERE `username`="admin"');
+    $db->query('INSERT INTO `qlhs_token` (`token`, `user`, `expiry`) VALUES 
+    ("'.$token.'", "'.$username.'", DATE_ADD(NOW(), INTERVAL \'30\' DAY))');
 
-    session()->set(["secert" => $secert, "username" => 'admin', 'code' => 0]);
+    $session = session();
+    $session->set(['username' => $username]);
+
+    setcookie('qlhs_user_token', $token, time() + 60*60*24*30);
+    setcookie('qlhs_user_name', $username, time() + 60*60*24*30);
+}
+
+function delete_cookie($cookie) {
+    if(isset($_COOKIE[$cookie])){
+        setcookie($cookie, '' ,-1);
+    }
 }

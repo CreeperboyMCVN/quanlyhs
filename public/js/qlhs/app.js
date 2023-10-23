@@ -10,8 +10,8 @@ var toDate;
 
 
 $(document).ready(function($) {
-    username = $('#username').val();
-    secert = $('#secert-key').val();
+    username = getCookie('qlhs_user_name');
+    secert = getCookie('qlhs_user_token');
     action = $('.action-data').val();
     max = $('.max-filter').val();
 
@@ -23,6 +23,25 @@ $('.close-filter').click(function (e) {
     e.preventDefault();
     $('.filter-popup').hide();
     $('.filter-overlay').hide();
+});
+
+$('.reset-filter').click(function (e) { 
+    setTimeout(() => {
+        max = $('.max-filter').val();
+        let filtSearch = $('#search').val();
+        if ((filtSearch != null) && (filtSearch != '')) {
+            search = $('#field').val() + '-' + filtSearch;
+        } else {
+            search = '';
+        }
+
+        fromDate = $("#date-start").val();
+        toDate = $("#date-end").val();
+        getData();
+        $('.filter-popup').hide();
+        $('.filter-overlay').hide();
+    }, 100);
+    
 });
 
 $('.open-filter').click(function (e) { 
@@ -265,8 +284,24 @@ function isInDate(date) {
         return d <= date2;
     }
     if (!isNaN(date1.getTime()) && !isNaN(date2.getTime())) {
-        return d >= date1 && d <= date2;
+        return (d >= date1) && (d <= date2);
     }
     return true;
 
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
