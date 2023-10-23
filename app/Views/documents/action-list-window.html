@@ -11,19 +11,11 @@
     
     <h4 class="filter-label">Lọc danh sách</h4>
     <form action="" method="">
-        <div class="max filter-section">
-            Hiển thị <input type="number" min="1" max="50" value='10' name="max" class="max-filter"/> phần tử 1 trang.
-        </div>
-        <div class='search filter-section'>
-            Tìm kiếm
-            <input type="text" name="search" id="search">
-            tại trường
-            <select name="field" id="field"></select>
-        </div>
-        <div class="date filter-section">
-            Từ ngày <input type="date" name="date-start" id="date-start"> đến <input type="date" name="date-end" id="date-end">
-        </div>
+        ${filter_max}
+        ${filter_search}
+        ${filter_date}
         <div class="confirm filter-section">
+            <button type="reset">Đặt lại</button>
             <button type="button" class="close-filter">Hủy bỏ</button>
             <button type="button" class="confirm-filter">Xác nhận</button>
         </div>

@@ -79,10 +79,16 @@ $('.confirm-filter').click(function (e) {
     $('.filter-popup').hide();
     $('.filter-overlay').hide();
     max = $('.max-filter').val();
-    if ($('#search').val() != '') {search = $('#field').val() + '-' + $('#search').val();}
-    else {
+    let filtSearch = $('#search').val();
+    if ((filtSearch != null) && (filtSearch != '')) {
+        search = $('#field').val() + '-' + filtSearch;
+    } else {
         search = '';
     }
+
+    fromDate = $("#date-start").val();
+    toDate = $("#date-end").val();
+
     getData();
     $('.table-wrapper').html("Đang tải dữ liệu...");
     $('.pages').html("");
@@ -103,7 +109,9 @@ function getData() {
             dat = data;
             $('.table-wrapper').html(table());
             $('.pages').html(page());
-            $("#field").html(getFields());
+            if (data.data.length > 0) {
+                $("#field").html(getFields());
+            }
         }
     );
 }
@@ -114,10 +122,12 @@ function table() {
     i=0;
 
     header = [];
+    mainDateField = '';
 
     switch (action) {
         case 'students':
-            header = ['Mã học sinh', 'Tên', 'Lớp', 'Ngày sinh'];
+            header = ['Mã học sinh', 'Tên', 'Lớp', 'Ngày sinh', 'Giới tính'];
+            mainDateField = 'dob';
             break;
     
         default:
@@ -135,20 +145,34 @@ function table() {
         return res;
     }
     dat.data.forEach(element => {
-        if (i+1 >= curr_page*max-max+1 && i+1 <= curr_page * max) {
-            if (i%2 == 0) {
-                c = "table-even";
-            } else {
-                c = "table-odd";
+        if (isInDate(element[mainDateField])) {
+            if (i+1 >= curr_page*max-max+1 && i+1 <= curr_page * max) {
+                j=0;
+                if (i%2 == 0) {
+                    c = "table-even";
+                } else {
+                    c = "table-odd";
+                }
+                res += `<tr class="${c}">`;
+                vals = Object.values(element);
+                keys = Object.keys(element);
+                vals.forEach(e => {
+                    if (keys[j] == 'gender') {
+                        if (e==0) {
+                            res += `<td>Nam</td>`;
+                        } else {
+                            res += `<td>Nữ</td>`;
+                        }
+                    } else {
+                        res += `<td>${e}</td>`;
+                    }
+                    j++;
+                });
+                res += '</tr>';
+
             }
-            res += `<tr class="${c}">`;
-            vals = Object.values(element);
-            vals.forEach(e => {
-                res += `<td>${e}</td>`
-            });
-            res += '</tr>';
+            i++;
         }
-        i++;
     });
     res += '</table>'
     return res;
@@ -228,4 +252,21 @@ function getFields() {
     })
 
     return res;
+}
+
+function isInDate(date) {
+    let date1 = new Date(fromDate);
+    let date2 = new Date(toDate);
+    let d = new Date(date);
+    if (!isNaN(date1.getTime()) && isNaN(date2.getTime())) {
+        return d >= date1;
+    }
+    if (isNaN(date1.getTime()) && !isNaN(date2.getTime())) {
+        return d <= date2;
+    }
+    if (!isNaN(date1.getTime()) && !isNaN(date2.getTime())) {
+        return d >= date1 && d <= date2;
+    }
+    return true;
+
 }
