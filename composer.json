@@ -2,6 +2,7 @@
     "name": "long/quanlyhs",
     "description": "du an khkt",
     "type": "project",
+    "license" : "Apache-2.0",
     "require": {
         "codeigniter4/framework": "^4.4",
         "phpoffice/phpspreadsheet": "^1.29"
