@@ -2,10 +2,12 @@
 
 Phần mềm QLHS là dự án KHKT cấp trường của Phan Hoài Linh và Nguyễn Lê Phi Long 12.5
 
-Note: kiểm tra thời hạn hết hạn cho token
+Note: hoàn thiện import
+- trả về 0 khi thành công
+- gửi hộp thoại khi thành công/thất bại
 
 Việc cần làm tiếp theo:
-- Làm form nhập
+- Làm form edit
 - ...
 ---
 ### Hướng dẫn cài đặt

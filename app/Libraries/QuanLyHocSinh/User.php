@@ -6,12 +6,12 @@ class User {
     public $username;
     public $window = 'menu';
     public $page = 1;
-    public $action = 'students';
+    public $view = 'students';
     public $max = 20;
 
     private $def_window = 'menu';
     private $def_page = 1;
-    private $def_action = 'students';
+    private $def_view = 'students';
     private $def_max = 20;
 
     private $database;
@@ -29,8 +29,8 @@ class User {
         if ($this->page != $this->def_page) {
             $pageData = array_merge($pageData, ["page" => $this->page]);
         }
-        if ($this->action != $this->def_action) {
-            $pageData = array_merge($pageData, ["action" => $this->action]);
+        if ($this->view != $this->def_view) {
+            $pageData = array_merge($pageData, ["view" => $this->view]);
         }
         if ($this->max != $this->def_max) {
             $pageData = array_merge($pageData, ["max" => $this->max]);
@@ -74,14 +74,13 @@ class User {
         return $sidebar->parse();
     }
     
-    public function getActionWindow() {
-        $aw = null;
-
-        if ($this->action == 'students') {
-            $aw = new StudentListWindow($this);
+    public function getViewWindow() {
+        if (isset($_GET['import'])) {
+            $aw = new ImportWindow($this->view);
+        } else {
+            $aw = new ListWindow($this->view);
         }
-        
-        if ($aw == null) return '';
+        if (!isset($aw)) return '';
         return $aw->getWindow();
     }
 }

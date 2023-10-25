@@ -25,6 +25,7 @@ Từ ngày <input type="date" name="date-start" id="date-start"> đến <input t
 abstract class ActionWindow {
     //put your code here
     public $user;
+    public $view;
     
     public function __construct($user) {
         if (!($user instanceof User)) {

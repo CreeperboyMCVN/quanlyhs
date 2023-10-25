@@ -23,6 +23,13 @@ function resolveErrorCode($code) {
     }
 }
 
+function error($code) {
+    // json header
+    header('Content-Type: application/json');
+    $response = ['code' => $code, 'message' => resolveErrorCode($code)];
+    die(json_encode($response));
+}
+
 function placeholder($view, $placeholder, $replace) {
     return str_replace('${'.$placeholder.'}', $replace, $view);
 }

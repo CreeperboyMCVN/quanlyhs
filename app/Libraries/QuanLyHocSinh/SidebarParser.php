@@ -19,11 +19,11 @@ class SidebarParser extends Parser {
         foreach ($actions as $key => $value) {
             if ($user->hasPermission($key, 'r')) {
                 $pageData = $user->getPageData();
-                $pageData["action"] = $key;
+                $pageData["view"] = $key;
                 $url = current_url() . arrayToUrlFormEncoded($pageData);
                 $class = $itemClass;
                 
-                if ($user->action == $key) {
+                if ($user->view == $key) {
                     $class .= ' ' . $selectedClass;
                 }
                 

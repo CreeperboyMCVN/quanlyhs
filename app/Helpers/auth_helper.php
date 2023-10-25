@@ -59,13 +59,14 @@ function generatePassword($password):string {
 
 function validSession($username, $token) {
     $db = db_connect();
-    $res = $db->query('SELECT `token` FROM `qlhs_token` WHERE `user`="'. $username .'"');
+    $res = $db->query('SELECT * FROM `qlhs_token` WHERE `user`="'. $username .'"');
     if ($res->getNumRows() == 0) {
         return false;
     }
     foreach ($res->getResult() as $value) {
         # code...
         if ($token == $value->token) {
+            if (time() > $value->expiry) return false;
             return true;
         }
     }

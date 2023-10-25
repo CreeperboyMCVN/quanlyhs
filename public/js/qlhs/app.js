@@ -1,6 +1,6 @@
 var username;
 var secert;
-var action;
+var view;
 var dat;
 var max;
 var curr_page = 1;
@@ -12,7 +12,7 @@ var toDate;
 $(document).ready(function($) {
     username = getCookie('qlhs_user_name');
     secert = getCookie('qlhs_user_token');
-    action = $('.action-data').val();
+    view = $('.user-view').val();
     max = $('.max-filter').val();
 
     getData();
@@ -78,6 +78,7 @@ $('.download-btn').click(function (e) {
 
 $('.pages').on('click', '.page-select', function (e) {
     curr_page = e.target.textContent;
+    updatePageInfo();
     $('.table-wrapper').html(table());
     $('.pages').html(page());
 });
@@ -89,6 +90,7 @@ $('.pages').on('click', '.three-dot', function (e) {
 
 $('.pages').on('focusout', '.set-page', function (e) {
     curr_page = $(this).val();
+    updatePageInfo();
     $('.table-wrapper').html(table());
     $('.pages').html(page());
 });
@@ -113,13 +115,30 @@ $('.confirm-filter').click(function (e) {
     $('.pages').html("");
 });
 
+$("#file").on("change", function (e) {
+    var file = $(this)[0].files[0];
+    var upload = new Upload(file);
+
+    // maby check size or type here with upload.getSize() and upload.getType()
+
+    // execute upload
+    upload.doUpload();
+});
+
 //functions
 
+function updatePageInfo() {
+    $('.page-info').html(`Đang hiển thị phần tử ${curr_page*max-max+1} đến 
+    ${dat.data.length >= curr_page*max ? curr_page*max : dat.data.length} 
+    trên tổng số ${dat.data.length}`);
+}
+
 function getData() {
+    $('.page-info').html('');
     let data = {
         secert: secert,
         username: username,
-        type: action,
+        type: view,
         search: search
     }
 
@@ -131,6 +150,7 @@ function getData() {
             if (data.data.length > 0) {
                 $("#field").html(getFields());
             }
+            updatePageInfo();
         }
     );
 }
@@ -143,7 +163,7 @@ function table() {
     header = [];
     mainDateField = '';
 
-    switch (action) {
+    switch (view) {
         case 'students':
             header = ['Mã học sinh', 'Tên', 'Lớp', 'Ngày sinh', 'Giới tính'];
             mainDateField = 'dob';
