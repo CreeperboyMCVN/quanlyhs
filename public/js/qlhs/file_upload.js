@@ -34,7 +34,11 @@ Upload.prototype.doUpload = function () {
         },
         success: function (data) {
             // your callback here
-            console.log(data);
+            if (data.code == 0) {
+                popup('Thành công', 'Thao tác thành công');
+            } else {
+                popup('Lỗi!', data.message);
+            }
         },
         error: function (error) {
             // handle error

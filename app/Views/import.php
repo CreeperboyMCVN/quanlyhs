@@ -8,9 +8,10 @@ if (!isset($_POST['view'])) {
 }
 
 $table = $_POST['view'];
-
-$file = $_FILES['file'];  // get the uploaded file data
-if (!empty($file)) {
+if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];  // get the uploaded file data
+}
+if (isset($file) && !empty($file)) {
     //open file with phpspreadsheet
     $db = db_connect();
     $db->query("TRUNCATE TABLE `qlhs_$table`");
@@ -24,7 +25,7 @@ if (!empty($file)) {
         $cells = $row->getCellIterator();
         if ($first_row) {
             foreach ($cells as $key => $value) {
-                $header[] = $value->getValue();
+                $header[] = '`'.$value->getValue().'`';
             }
             $first_row = false;
         } else {
@@ -46,8 +47,34 @@ if (!empty($file)) {
         }
         
     }
+    header('Content-Type: application/json');
+    die(json_encode(['code' => 0, 'message' => 'Thành công!']));
         
 
 } else {
-    echo "Import using data";
+    $arr = [];
+    parse_str($_POST['data'], $arr);
+    foreach ($arr as $key => $value) {
+        # code...
+        if ($value == '') error(7);
+    }
+    $fields = '`' . implode('`,`', array_keys($arr)) . '`';
+    $values = '\'' . implode('\',\'', array_values($arr)) . '\'';
+
+    $db = db_connect();
+    $sql = "INSERT INTO `qlhs_$table` ($fields) VALUES ($values)";
+    header('Content-Type: application/json');
+    try {
+        $db->query($sql);
+        die( json_encode([
+            'code' => 0,
+            'message' => 'Thêm thành công!'
+        ]));
+    } catch (\Throwable $e) {
+        die( json_encode([
+            'code' => $e->getCode(),
+            'message' => $e->getMessage()
+            ]));
+    }
+    
 }

@@ -16,6 +16,8 @@ function resolveErrorCode($code) {
             return "Vui lòng xác định bảng dữ liệu!";
         case 6:
             return "Không đủ tham số!";
+        case 7:
+            return "Vui lòng điền đủ thông tin!";
         default:
             # code...
             return "Lỗi không xác định!";

@@ -98,7 +98,7 @@ footer {
     width: 80%;
 }
 
-.filter-popup {
+.filter-popup, .popup-content {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -106,9 +106,15 @@ footer {
     background: #f1f1f1;
     padding: 1em;
     border-radius: 5px;
+    z-index: 1000;
 }
 
-.filter-overlay {
+.popup-content {
+    min-width: 25%;
+    text-align: center;
+}
+
+.filter-overlay, .popup {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -195,6 +201,7 @@ button:hover {
     text-align: left;
     background: #fff;
     box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+    z-index: -1;
   }
   
   #progress-wrp .progress-bar {

@@ -38,7 +38,7 @@ if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'username', $user->username);
     $workframe = placeholder($workframe, 'user_window', $user->window);
     $workframe = placeholder($workframe, 'user_view', $user->view);
-    //$workframe = placeholder($workframe, 'table_content', $table->getTable());
+    $workframe = placeholder($workframe, 'import_link', basename($_SERVER['REQUEST_URI']) . '&import=');
 }
 
 //echo var_dump($user->getUrlFormPageData());

@@ -7,6 +7,7 @@ var curr_page = 1;
 var search = '';
 var fromDate;
 var toDate;
+var content;
 
 
 $(document).ready(function($) {
@@ -23,6 +24,11 @@ $('.close-filter').click(function (e) {
     e.preventDefault();
     $('.filter-popup').hide();
     $('.filter-overlay').hide();
+});
+
+$('.close-popup').click(function (e) { 
+    e.preventDefault();
+    $('.popup').hide();
 });
 
 $('.reset-filter').click(function (e) { 
@@ -55,9 +61,9 @@ $('.download-btn').click(function (e) {
 
     arr = [];
 
-    if (dat.data.length < 1) return;
+    if (content.length < 1) return;
 
-    dat.data.forEach(v => {
+    content.forEach(v => {
         arr = arr.concat([Object.values(v)]);
     })
 
@@ -99,7 +105,8 @@ $('.confirm-filter').click(function (e) {
     e.preventDefault();
     $('.filter-popup').hide();
     $('.filter-overlay').hide();
-    max = $('.max-filter').val();
+    max = Math.round($('.max-filter').val());
+    $('.max-filter').val(max);
     let filtSearch = $('#search').val();
     if ((filtSearch != null) && (filtSearch != '')) {
         search = $('#field').val() + '-' + filtSearch;
@@ -125,12 +132,17 @@ $("#file").on("change", function (e) {
     upload.doUpload();
 });
 
+$('.manual-import-btn').click(function (e) { 
+    e.preventDefault();
+    manualImport();
+});
+
 //functions
 
 function updatePageInfo() {
-    $('.page-info').html(`Đang hiển thị phần tử ${curr_page*max-max+1} đến 
-    ${dat.data.length >= curr_page*max ? curr_page*max : dat.data.length} 
-    trên tổng số ${dat.data.length}`);
+    $('.page-info').html(`Đang hiển thị phần tử ${curr_page*max-max+1 < 0 ? 0 : curr_page*max-max+1} đến 
+    ${content.length >= curr_page*max ? curr_page*max : content.length} 
+    trên tổng số ${content.length}`);
 }
 
 function getData() {
@@ -145,6 +157,8 @@ function getData() {
     $.post("data", data,
         function (data, textStatus, jqXHR) {
             dat = data;
+            content = dat.data;
+            content = filterByDate(dat.datefield);
             $('.table-wrapper').html(table());
             $('.pages').html(page());
             if (data.data.length > 0) {
@@ -160,31 +174,24 @@ function table() {
     res = '<table class="data-table">';
     i=0;
 
-    header = [];
-    mainDateField = '';
+    let header = dat.header;
+    let mainDateField = dat.datefield;
 
-    switch (view) {
-        case 'students':
-            header = ['Mã học sinh', 'Tên', 'Lớp', 'Ngày sinh', 'Giới tính'];
-            mainDateField = 'dob';
-            break;
-    
-        default:
-            break;
-    }
     res += '<tr class="table-header">';
     header.forEach(e => {
         res += `<th>${e}</th>`;
     })
     res += '</tr>';
-    if (dat.data.length == 0) {
+    //filter
+
+    if (content.length == 0) {
         res += '<tr class="table-even">'
             + `<td colspan=${header.length} style="text-align: center;">Không có dữ liệu...</td>`
             + '</tr></table>';
         return res;
     }
-    dat.data.forEach(element => {
-        if (isInDate(element[mainDateField])) {
+    content.forEach(element => {
+        
             if (i+1 >= curr_page*max-max+1 && i+1 <= curr_page * max) {
                 j=0;
                 if (i%2 == 0) {
@@ -211,7 +218,7 @@ function table() {
 
             }
             i++;
-        }
+        
     });
     res += '</table>'
     return res;
@@ -220,7 +227,7 @@ function table() {
 function page() {
     validPage();
     res = "<ul class='page'>";
-    max_page = Math.ceil(dat.data.length / max);
+    max_page = Math.ceil(content.length / max);
     thrdt = false;
     for (let index = 1; index <= max_page; index++) {
         
@@ -272,7 +279,7 @@ function page() {
 }
 
 function validPage() {
-    max_page = Math.ceil(dat.data.length / max);
+    max_page = Math.ceil(content.length / max);
     if (curr_page < 1 || curr_page == null) {
         curr_page = 1;
     }
@@ -282,8 +289,8 @@ function validPage() {
 }
 
 function getFields() {
-    if (dat.data.length < 1) return '';
-    keys = Object.keys(dat.data[0]);
+    if (content.length < 1) return '';
+    keys = Object.keys(content[0]);
     res = '';
     
     keys.forEach(v => {
@@ -324,4 +331,45 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function popup(title, message) {
+    $('.popup-title').html(title);
+    $('.popup-message').html(message);
+    $('.popup').show();
+}
+
+function filterByDate(field) {
+    let data = content;
+    let filteredData = [];
+    data.forEach((v) => {
+        if (isInDate(v[field])) {
+            filteredData.push(v);
+        }
+    })
+    return filteredData;
+}
+
+function manualImport() {
+    let dat = '';
+    $('.manual-form').each(function (index, element) {
+        // element == this
+        dat += $(this).attr('name') + '=' + $(this).val() + '&';
+    });
+    dat = dat.substring(0, dat.length-1);
+    let data = {
+        data: dat,
+        token: secert,
+        username: username,
+        view: view
+    }
+    $.post("import", data,
+        function (data, textStatus, jqXHR) {
+            if (data.code != 0) {
+                popup('Lỗi', data.message);
+            } else {
+                popup('Thành công', 'Thêm thành công');
+            }
+        }
+    );
 }
