@@ -13,6 +13,14 @@ if (isset($_GET['window'])) {
     $user->window = $_GET['window'];
 }
 
+if (isset($_GET['import'])) {
+    $user->action = 'import';
+}
+
+if (isset($_GET['edit'])) {
+    $user->action = 'edit';
+} 
+
 if (isset($_GET['page'])) {
     $user->page = $_GET['page'];
 }
@@ -39,6 +47,18 @@ if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'user_window', $user->window);
     $workframe = placeholder($workframe, 'user_view', $user->view);
     $workframe = placeholder($workframe, 'import_link', basename($_SERVER['REQUEST_URI']) . '&import=');
+    // js for view
+    switch ($user->action) {
+        case 'edit':
+            $workframe = placeholder($workframe, 'javascript_file', './js/qlhs/edit-window.js');
+            break;
+        case 'import':
+            $workframe = placeholder($workframe, 'javascript_file', './js/qlhs/import-window.js');
+            break;
+        default:
+            $workframe = placeholder($workframe, 'javascript_file', './js/qlhs/list-window.js');
+            break;
+    }
 }
 
 //echo var_dump($user->getUrlFormPageData());

@@ -2,12 +2,11 @@
 
 Phần mềm QLHS là dự án KHKT cấp trường của Phan Hoài Linh và Nguyễn Lê Phi Long 12.5
 
-Note: hoàn thiện import
-- trả về 0 khi thành công
-- gửi hộp thoại khi thành công/thất bại
+Note: hoàn thiện edit
+- tạo tệp php để nhận request chỉnh sửa
 
 Việc cần làm tiếp theo:
-- Làm form edit
+- Làm danh sách gv
 - ...
 ---
 ### Hướng dẫn cài đặt

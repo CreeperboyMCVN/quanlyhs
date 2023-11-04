@@ -8,6 +8,7 @@ class User {
     public $page = 1;
     public $view = 'students';
     public $max = 20;
+    public $action = 'list';
 
     private $def_window = 'menu';
     private $def_page = 1;
@@ -75,7 +76,9 @@ class User {
     }
     
     public function getViewWindow() {
-        if (isset($_GET['import'])) {
+        if (isset($_GET['edit'])) {
+            $aw = new EditWindow($this->view);
+        } else if (isset($_GET['import'])) {
             $aw = new ImportWindow($this->view);
         } else {
             $aw = new ListWindow($this->view);
