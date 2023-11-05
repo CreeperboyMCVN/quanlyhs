@@ -15,7 +15,7 @@ class EditWindow extends ActionWindow {
         switch ($this->view) {
             case 'students':
                 $inputs .= Input::label('ID', ['class' => 'id-label']) . '<br>';
-                $inputs .= Input::text('id', '', ['class' => 'edit-form id-form primary-form']). '<br>';
+                $inputs .= Input::text('id', '', ['class' => 'edit-form id-form primary-form', 'autocomplete' => 'off']). '<br>';
                 $inputs .= Input::label('Tên', ['class' => 'name-label']). '<br>';
                 $inputs .= Input::text('name', '', ['class' => 'edit-form name-form']). '<br>';
                 $inputs .= Input::label('Ngày sinh', ['class' => 'birthday-label']). '<br>';

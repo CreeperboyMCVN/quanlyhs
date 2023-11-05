@@ -116,6 +116,7 @@ function table() {
     header.forEach(e => {
         res += `<th>${e}</th>`;
     })
+    res += `<th></th>`;
     res += '</tr>';
     //filter
 
@@ -137,14 +138,21 @@ function table() {
                 res += `<tr class="${c}">`;
                 vals = Object.values(element);
                 keys = Object.keys(element);
+                let id = '';
                 vals.forEach(e => {
+                    
+                    if (keys[j] ==  'id') {
+                        id = e;
+                    }
                     if (keys[j] == 'gender') {
                         res += `<td>${gender(e)}</td>`
                     } else {
                         res += `<td>${e}</td>`;
                     }
+                    
                     j++;
                 });
+                res += `<td><a href="${window.location.href + '&edit=&id='+id}"><i class="fa-solid fa-pencil"></i></a></td>`;
                 res += '</tr>';
 
             }

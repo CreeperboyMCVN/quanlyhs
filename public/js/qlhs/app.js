@@ -130,3 +130,14 @@ function cutText(text, length) {
     //text = text.substring(0, last);
     return "..." + text;
 }
+
+function getParam(param) {
+    url = window.location.href;
+    let params = url.split('?')[1].split("&");
+    //console.log(params);
+    for (let i = 0; i < params.length; i++) {
+        let obj = params[i].split('=');
+        if (obj[0] == param) return obj[1];
+    }
+    return "";
+}

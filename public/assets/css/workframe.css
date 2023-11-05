@@ -219,3 +219,19 @@ button:hover {
     display: inline-block;
     color: #000000;
   }
+
+  .suggest-menu {
+    position: fixed;
+    background: #eeeeee;
+    box-shadow: 5px 5px 5px #000000;
+    
+  }
+
+  .suggest-option {
+    cursor: pointer;
+    padding: 0.25em;
+  }
+
+  .suggest-option:hover {
+    background: #dddddd;
+  }

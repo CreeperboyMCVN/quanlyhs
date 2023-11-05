@@ -14,10 +14,44 @@ $('.primary-form').on('input', function () {
             applyValue('');
     }, 500);
 });
+
+$(document).ready(function () {
+    let primVal = getParam($('.primary-form').attr('name'));
+    if (primVal != '') {
+        setTimeout(() => {
+            getData();
+            $('.primary-form').val(primVal);
+            applyValue(primVal);
+        }, 1000);
+    }
+});
+
+let mouseX = 0;
+let mouseY = 0;
     
+$(this).mousemove(function (e) { 
+    // values: e.clientX, e.clientY, e.pageX, e.pageY
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
 
 $('.primary-form').on('focus', function () {
+    getData();
+    setTimeout(() => {
+        let res = '';
+        for (let i = 0; i<content.length; i++) {
+            if (i<5) res += `<div class="suggest-option" value="${content[i].id}">` + 
+            cutText(content[i].name, 20) + ' - ' + content[i].id + 
+            ' - ' + content[i].class + '</div>';
+        }
+        $('.suggest-menu').html(res);
+        if (content.length >0) applyValue(content[0]['id']) 
+            else
+            applyValue('');
+    }, 500);
     $('.suggest-menu').show();
+    $('.suggest-menu').css('left', mouseX);
+    $('.suggest-menu').css('top', mouseY+5);
 });
 
 $('.primary-form').on('focusout', function () {
