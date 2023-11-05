@@ -18,6 +18,8 @@ function resolveErrorCode($code) {
             return "Không đủ tham số!";
         case 7:
             return "Vui lòng điền đủ thông tin!";
+        case 8:
+            return "Thiếu giá trị trường chính";
         default:
             # code...
             return "Lỗi không xác định!";

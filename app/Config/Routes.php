@@ -15,3 +15,4 @@ $routes->get('/spreadsheet', 'Home::spreadsheet');
 $routes->get('/setup', 'Home::setup');
 $routes->post('/data', 'Home::data');
 $routes->post('/import', 'Home::import');
+$routes->post('/edit', 'Home::edit');

@@ -53,4 +53,8 @@ class Home extends BaseController
     public function import() {
         return view('import');
     }
+
+    public function edit() {
+        return view('edit');
+    }
 }

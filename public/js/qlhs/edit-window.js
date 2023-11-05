@@ -63,3 +63,55 @@ function applyValue(primary) {
         });
     }
 }
+
+function edit(action) {
+    let data;
+    let dat = '';
+    $('.edit-form').each(function (index, element) {
+        // element == this
+        dat += $(this).attr('name') + '=' + $(this).val() + '&';
+    });
+    dat = dat.substring(0, dat.length-1);
+    switch (action) {
+        case "edit":
+            data = {
+                token: secert,
+                username: username,
+                view: view,
+                data: dat,
+                action: action,
+                primary: $('.primary-form').attr('name')+'-'+$('.primary-form').val(),
+            }
+            break;
+        case 'delete':
+            data = {
+                token: secert,
+                username: username,
+                view: view,
+                data: dat,
+                action: action,
+                primary: $('.primary-form').attr('name')+'-'+$('.primary-form').val(),
+            }
+            break;
+    }
+    $.post("edit", data,
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+            if (data.code == 0) {
+                popup('Thành công!', data.message);
+            } else {
+                popup('Thất bại!', data.message);
+            }
+        }
+    );
+}
+
+$('.edit-btn').on('click', function (e) {
+    e.preventDefault();
+    edit('edit');
+});
+
+$('.delete-btn').on('click', function (e) {
+    e.preventDefault();
+    edit('delete');
+});

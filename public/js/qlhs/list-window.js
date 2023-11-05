@@ -222,7 +222,7 @@ function validPage() {
 function updateList() {
     $('.table-wrapper').html(table());
             $('.pages').html(page());
-            if (data.data.length > 0) {
+            if (dat.data.length > 0) {
                 $("#field").html(getFields());
             }
             updatePageInfo();

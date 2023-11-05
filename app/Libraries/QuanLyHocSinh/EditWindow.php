@@ -25,6 +25,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::label('Lớp', ['class' => 'class-label']). '<br>';
                 $inputs .= Input::text('class', '', ['class'=> 'edit-form class-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
+                $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa học sinh');
                 break;
         }
