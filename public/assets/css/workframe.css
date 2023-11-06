@@ -235,3 +235,16 @@ button:hover {
   .suggest-option:hover {
     background: #dddddd;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }

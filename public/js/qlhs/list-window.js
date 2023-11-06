@@ -122,7 +122,7 @@ function table() {
 
     if (content.length == 0) {
         res += '<tr class="table-even">'
-            + `<td colspan=${header.length} style="text-align: center;">Không có dữ liệu...</td>`
+            + `<td colspan=${header.length+1} style="text-align: center;">Không có dữ liệu...</td>`
             + '</tr></table>';
         return res;
     }

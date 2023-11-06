@@ -6,7 +6,7 @@ class SidebarParser extends Parser {
     public function parse():string {
         $actions = [
             'students'      => IconDictionary::$users . Utils::tag('span', ['function-item-label'], 'Danh sách học sinh'),
-            'teachers'      => IconDictionary::$teacher . Utils::tag('span', ['function-item-label'], 'Danh sách giáo viên'),
+            'teachers'      => IconDictionary::$teacher . Utils::tag('span', ['function-item-label'], 'Danh sách giáo viên chủ nhiệm'),
             'violate'       => IconDictionary::$warning . Utils::tag('span', ['function-item-label'], 'Danh sách vi phạm'),
             'log'           => IconDictionary::$checkcircle . Utils::tag('span', ['function-item-label'], 'Nhật ký vi phạm')
         ];

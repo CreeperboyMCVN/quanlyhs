@@ -42,6 +42,22 @@ switch ($type) {
         $tableHeader = ['Mã học sinh', 'Tên', 'Lớp', 'Ngày sinh', 'Giới tính'];
         $mainDateField = 'dob';
         break;
+    case 'teachers':
+        # code...
+        $tableHeader = ['Mã giáo viên', 'Tên', 'Lớp', 'Email', 'Tổ'];
+        $mainDateField = '';
+        break;
+
+    case 'violate':
+        # code...
+        $tableHeader = ['Mã vi phạm', 'Tên', 'Điểm trừ'];
+        $mainDateField = '';
+        break;
+    case 'log':
+        # code...
+        $tableHeader = ['Mã nhật ký', 'Mã học sinh vi phạm', 'Mã vi phạm', 'Thời gian', 'Giám thị', 'Trừ điểm?'];
+        $mainDateField = 'time';
+        break;
     
     default:
         # code...

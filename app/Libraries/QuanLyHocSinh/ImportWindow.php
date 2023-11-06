@@ -31,8 +31,36 @@ class ImportWindow extends ActionWindow {
                 $inputs .= Input::label('Lớp', ['class' => 'class-label']). '<br>';
                 $inputs .= Input::text('class', '', ['class'=> 'manual-form class-form']). '<br>';
                 $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
-                $v = placeholder($v, 'window_title', 'Nhập danh sách học sinh');
+                $v = placeholder($v, 'window_title', 'Nhập học sinh');
                 break;
+            case 'teachers':
+                $inputs .= Text::header(3, 'Nhập thủ công', ['class' => 'form-header']);
+                $inputs .= Input::label('ID', ['class' => 'id-label']) . '<br>';
+                $inputs .= Input::text('id', '', ['class' => 'manual-form id-form']). '<br>';
+                $inputs .= Input::label('Tên', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('name', '', ['class' => 'manual-form name-form']). '<br>';
+                $inputs .= Input::label('Lớp', ['class' => 'class-label']). '<br>';
+                $inputs .= Input::text('class', '', ['class'=> 'manual-form class-form']). '<br>';
+                $inputs .= Input::label('Email' , ['class' => 'email-label']) . '<br>';
+                $inputs .= Input::text('email', '', ['class'=> 'manual-form email-form']). '<br>';
+                $inputs .= Input::label('Tổ', ['class' => 'team-label']). '<br>';
+                $inputs .= Input::text('team', '', ['class'=> 'manual-form team-form']). '<br>';
+                $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
+                $v = placeholder($v, 'window_title', 'Nhập giáo viên chủ nhiệm');
+                break;
+            case 'violate':
+                $inputs .= Text::header(3, 'Nhập thủ công', ['class' => 'form-header']);
+                $inputs .= Input::label('ID', ['class' => 'id-label']) . '<br>';
+                $inputs .= Input::text('id', '', ['class' => 'manual-form id-form']). '<br>';
+                $inputs .= Input::label('Tên', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('name', '', ['class' => 'manual-form name-form']). '<br>';
+                $inputs .= Input::label('Điểm trừ', ['class' => 'points-label']). '<br>';
+                $inputs .= Input::number('points', '0', ['class'=> 'manual-form points-form']). '<br>';
+                $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
+                $v = placeholder($v, 'window_title', 'Nhập vi phạm');
+                break;
+            case 'log':
+                return 'Không thể nhập trực tiếp! Vui lòng dùng POS!';
         }
         
         $v = placeholder($v, 'form_content', $inputs);
