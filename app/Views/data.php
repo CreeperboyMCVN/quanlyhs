@@ -16,19 +16,31 @@ $type = $_POST['type'];
 if (!validSession($username, $secert)) {
     error(4);
 }
+$gb = isset($_POST['global_search']);
 
 $db = db_connect();
 
 $db->setPrefix('qlhs_');
 $table = $db->prefixTable($type);
 
-if (isset($_POST['search']) && $_POST['search'] != null) {
+if (isset($_POST['search']) && $_POST['search'] != null && !$gb) {
     $search_arr = explode('-', $_POST['search']);
     if (count($search_arr) < 2) {
         error(6);
     }
     $sr = '%'.$search_arr[1].'%';
     $query = $db->query("SELECT * FROM $table WHERE `$search_arr[0]` LIKE '$sr'");
+} else if (isset($_POST['search']) && $_POST['search'] != null && $gb) {
+    $tbdes = $db->query("DESCRIBE $table");
+    $tbdesRes = $tbdes->getResult('array');
+    $likeStmt = '';
+    $sear = $_POST['search'];
+    foreach ($tbdesRes as $val) {
+        $f = $val['Field'];
+        $likeStmt .= " `$f` LIKE '%$sear%' OR";
+    }
+    $likeStmt = rtrim($likeStmt, 'OR');
+    $query = $db->query("SELECT * FROM $table WHERE $likeStmt");
 } else {
     $query = $db->query("SELECT * FROM $table");
 }

@@ -2,6 +2,7 @@
 use QuanLyHocSinh\User;
 use QuanLyHocSinh\Utils;
 use QuanLyHocSinh\Html\Table;
+use QuanLyHocSinh\InputPosWindow;
 
 if (isset(session()->username)) {
     $user = new User(session()->username);
@@ -37,6 +38,7 @@ if (isset($_GET['max'])) {
 
 
 $workframe = view('documents/workframe.html');
+$pos = view('documents/pos.html');
 
 if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'document_title', 'Test');
@@ -61,6 +63,15 @@ if ($user->window == 'workframe') {
     }
 }
 
+if ($user->window == 'pos') {
+    switch ($user->view) {
+        default:
+        $pos = placeholder($pos, 'pos_content', (new InputPosWindow($user))->getWindow());
+        $pos = placeholder($pos, 'javascript_file', './js/qlhs/input-pos.js');
+        break;
+    }
+}
+
 //echo var_dump($user->getUrlFormPageData());
 
 switch ($user->window) {
@@ -71,6 +82,10 @@ switch ($user->window) {
 
     case 'workframe':
         echoDocument($workframe);
+        break;
+
+    case 'pos':
+        echoDocument($pos);
         break;
     
     default:
