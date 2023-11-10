@@ -1,7 +1,6 @@
 <?php
 use QuanLyHocSinh\User;
-use QuanLyHocSinh\Utils;
-use QuanLyHocSinh\Html\Table;
+use QuanLyHocSinh\MenuWindow;
 use QuanLyHocSinh\InputPosWindow;
 
 if (isset(session()->username)) {
@@ -49,6 +48,7 @@ if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'user_window', $user->window);
     $workframe = placeholder($workframe, 'user_view', $user->view);
     $workframe = placeholder($workframe, 'import_link', basename($_SERVER['REQUEST_URI']) . '&import=');
+    $workframe = placeholder($workframe, 'base_url', base_url());
     // js for view
     switch ($user->action) {
         case 'edit':
@@ -77,7 +77,8 @@ if ($user->window == 'pos') {
 switch ($user->window) {
     case 'menu':
         # something with menu
-        echoDocument(view('documents/menu.html'));
+        $vi = new MenuWindow($user);
+        echoDocument($vi->getWindow());
         break;
 
     case 'workframe':
@@ -91,6 +92,7 @@ switch ($user->window) {
     default:
         # return menu
         //echo $window;
-        echoDocument(view('documents/menu.html'));
+        $vi = new MenuWindow($user);
+        echoDocument($vi->getWindow());
         break;
 }

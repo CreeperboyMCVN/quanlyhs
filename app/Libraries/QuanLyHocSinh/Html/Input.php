@@ -37,6 +37,10 @@ class Input {
         return '<button '. self::getAttributes($attr).'>'.htmlspecialchars($title).'</button>';
     }
 
+    public static function htmlButton($html, array $attr = []) {
+        return '<button '. self::getAttributes($attr).'>'.$html.'</button>';
+    }
+
     public static function email($name, $value = '', array $attr = []) {
         return '<input type="email" name="' . htmlspecialchars($name). '" value="'.htmlspecialchars($value
         ) .'" '. self::getAttributes($attr).'>';

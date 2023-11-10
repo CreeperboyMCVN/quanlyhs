@@ -14,6 +14,17 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function parseArray(array) {
+    let string = '';
+    if (typeof array != 'Map') {
+        array = new Map(Object.entries(array));
+    }
+    array.forEach((v,k) => {
+        string += k + '='+ v + '&';
+    });
+    return string.slice(0,-1);
+}
+
 function popup(title, message) {
     $('.popup-title').html(title);
     $('.popup-message').html(message);
@@ -57,3 +68,8 @@ function getParam(param) {
     }
     return "";
 }
+
+$('.close-popup').click(function (e) { 
+    e.preventDefault();
+    $('.popup').hide();
+});

@@ -70,5 +70,35 @@ button:hover {
 }
 
 .suggest-option {
-    margin: 0.25em;
+    padding: 0.25em;
+    cursor: pointer;
+}
+
+.suggest-option:hover {
+    background: #d5d5d5;
+}
+
+.filter-popup, .popup-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: #f1f1f1;
+    padding: 1em;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.popup-content {
+    min-width: 25%;
+    text-align: center;
+}
+
+.filter-overlay, .popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #00000090;
 }

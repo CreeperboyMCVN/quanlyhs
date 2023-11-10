@@ -17,6 +17,7 @@ if (!validSession($username, $secert)) {
     error(4);
 }
 $gb = isset($_POST['global_search']);
+$strict = isset($_POST['strict']);
 
 $db = db_connect();
 
@@ -29,7 +30,12 @@ if (isset($_POST['search']) && $_POST['search'] != null && !$gb) {
         error(6);
     }
     $sr = '%'.$search_arr[1].'%';
-    $query = $db->query("SELECT * FROM $table WHERE `$search_arr[0]` LIKE '$sr'");
+    if (!$strict) {
+        $query = $db->query("SELECT * FROM $table WHERE `$search_arr[0]` LIKE '$sr'");
+    } else {
+        $query = $db->query("SELECT * FROM $table WHERE `$search_arr[0]` = '$search_arr[1]'");
+    }
+    
 } else if (isset($_POST['search']) && $_POST['search'] != null && $gb) {
     $tbdes = $db->query("DESCRIBE $table");
     $tbdesRes = $tbdes->getResult('array');
