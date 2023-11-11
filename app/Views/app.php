@@ -65,10 +65,15 @@ if ($user->window == 'workframe') {
 
 if ($user->window == 'pos') {
     switch ($user->view) {
+        case 'record':
+            $pos = placeholder($pos, 'pos_content', view('documents/stats-pos.html'));
+            $pos = placeholder($pos, 'window_title', 'POS Thống Kê');
+            $pos = placeholder($pos, 'javascript_file', './js/qlhs/record-pos.js');
+            break;
         default:
-        $pos = placeholder($pos, 'pos_content', (new InputPosWindow($user))->getWindow());
-        $pos = placeholder($pos, 'javascript_file', './js/qlhs/input-pos.js');
-        break;
+            $pos = placeholder($pos, 'pos_content', (new InputPosWindow($user))->getWindow());
+            $pos = placeholder($pos, 'javascript_file', './js/qlhs/input-pos.js');
+            break;
     }
 }
 
