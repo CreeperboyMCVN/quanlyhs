@@ -1,14 +1,13 @@
 <div class="stat-container">
+    <div class="hover"></div>
     <h1 class="window-title">${window_title}</h1>
     <div class="content">
         <h3 class="content-title">Cài đặt thống kê</h3>
         <form action="" class="stat-view-options">
             <label class="form-label summary-label">Thống kê theo</label>
             <input type="checkbox" name="option-none" class="record-option none">Toàn bộ<br>
-            <input type="checkbox" name="option-date" class="record-option date">Ngảy<br>
+            <input type="checkbox" name="option-date" class="record-option date">Ngày<br>
             <input type="checkbox" name="option-class" class="record-option class">Lớp<br>
-            <input type="checkbox" name="option-student" class="record-option student">Học sinh<br>
-            <input type="checkbox" name="option-violate" class="record-option violate">Loại vi phạm<br>
             <div class="options">
 
             </div>
@@ -16,11 +15,13 @@
     </div>
     <div class="content">
         <h3 class="content-title">Xem trước bảng thống kê</h3>
-        <div class="table-container"></div>
+        <div class="table-container">
+            <table class='preview-table'></table>
+        </div>
     </div>
     <div class="content">
         <h3 class="content-title">Xuất</h3>
-        <button class="excel normal-button">Xuất ra Excel</button>
-        <button class="email normal-button">Gửi Mail cho GVCN</button>
+        <button class="excel normal-button" type="button">Xuất ra Excel</button>
+        <button class="email normal-button" type="button">Gửi Mail cho GVCN</button>
     </div>
 </div>

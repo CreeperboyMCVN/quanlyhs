@@ -18,6 +18,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: -1;
 }
 
 h1 {
@@ -96,7 +97,7 @@ button:hover {
     background: #f1f1f1;
     padding: 1em;
     border-radius: 5px;
-    z-index: 1000;
+    z-index: 999999;
 }
 
 .popup-content {
@@ -123,4 +124,59 @@ button:hover {
 
 .options {
     margin-top: 1em;
+}
+
+.table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+table {
+    margin-top: 1em;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr th {
+    background: #acabab;
+    text-align: center;
+}
+
+table tr.table-even {
+    background: #e2e1e1;
+}
+
+table tr.table-odd {
+    background: #d0cece;
+}
+
+table {
+    width: 100%;
+}
+
+.violate-cell {
+    overflow-y: auto;
+    text-overflow: ellipsis;
+    max-height: 54px;
+}
+
+.violate-cell div {
+    margin-bottom: 5px;
+}
+
+.hover {
+    display: fixed;
+    background: #f0f0f0;
+    position: absolute;
+    
+    pointer-events: none;
+    max-width: 300px;
+    padding: 0.25em;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.right-btn-container {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
 }

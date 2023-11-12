@@ -57,4 +57,8 @@ class Home extends BaseController
     public function edit() {
         return view('edit');
     }
+
+    public function record() {
+        return view('record');
+    }
 }
