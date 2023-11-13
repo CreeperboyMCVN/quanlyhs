@@ -223,3 +223,37 @@ function hideHover() {
     $('.hover').hide();
 }
 
+$('.excel').click(function (e) { 
+    e.preventDefault();
+    arr = [];
+
+    if (record.length < 1) return;
+
+    arr.push(callback.tableHeader);
+
+    record.forEach(v => {
+        var row = Object.values(v);
+        var vl = row[row.length -1];
+        var vlText = '';
+        vl.forEach(v1 => {
+            vlText += v1 + '; ';
+        });
+        vlText = vlText.substring(0, vlText.length -1);
+        row[row.length -1] = vlText;
+        arr.push(row);
+    })
+
+    let data = {
+        filename: 'record',
+        data: JSON.stringify(arr),
+    }
+    console.log(arr);
+    $.post("./spreadsheet", data,
+        function (data, textStatus, jqXHR) {
+            if (data.code == 0) {
+                $('.download').attr('src', data.filename);
+            } else alert(data.message);
+        },
+        "json"
+    );
+});

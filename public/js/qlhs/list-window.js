@@ -31,6 +31,8 @@ $('.download-btn').click(function (e) {
 
     if (content.length < 1) return;
 
+    arr.concat(dat.header);
+
     content.forEach(v => {
         arr = arr.concat([Object.values(v)]);
     })

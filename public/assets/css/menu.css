@@ -1,6 +1,10 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins-Regular.ttf');
+}
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins';
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
@@ -23,7 +27,6 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    
 }
 
 .menu-title {
@@ -36,27 +39,29 @@ body {
     background-color: #3498db;
     color: #ffffff;
     border: none;
-    padding: 25px 50px;
+    padding: 30px;
     margin: 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 .button:hover {
     background-color: #2980b9;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .button {
         width: 100%;
         margin: 5px 0;
     }
     
-    .top-buttons, .bottom-buttons {
+    /* Consider providing more specific class names for better clarity */
+    .container {
         flex-direction: column;
-        width: auto;
     }
 }
 

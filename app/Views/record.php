@@ -42,8 +42,11 @@ switch ($type) {
                         if ($value2['id'] == $value1['violate_id']) {
                             $pts = $value2['points'];
                             $totalPts += $pts;
+                            $id = $value1['id'];
+                            $sv = $value1['supervisor'];
                             array_push($violate, $value2['name'] . ' ' . 
-                                date("d/m/Y", strtotime($value1['time'])));
+                                date("d/m/Y", strtotime($value1['time'])) .
+                                " ($sv, $id)");
                         }
                     }
                     
@@ -77,6 +80,8 @@ switch ($type) {
             } else {
                 $log_data = $db->query("SELECT * FROM `qlhs_log` WHERE `time` BETWEEN '$start' AND '$end'")->getResult('array');
             }
+        } else {
+            $log_data = $db->query('SELECT * FROM `qlhs_log`')->getResult('array');
         }
         if (isset($_POST['class']) && $_POST['class'] != '') {
             $class = $_POST['class'];
@@ -100,8 +105,11 @@ switch ($type) {
                     foreach ($violate_data as $value2) {
                         if ($value2['id'] == $value1['violate_id']) {
                             $pts = $value2['points'];
+                            $supervisor = $value1['supervisor'];
+                            $id = $value1['id'];
                             array_push($violate, $value2['name'] . ' ' . 
-                                date("d/m/Y", strtotime($value1['time'])));
+                                date("d/m/Y", strtotime($value1['time'])) . 
+                                " ($supervisor, $id)");
                             $totalPts += $pts;
                         }
                     }
