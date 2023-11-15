@@ -5,13 +5,17 @@ use QuanLyHocSinh\Html\Input;
 use QuanLyHocSinh\Html\Text;
 
 class EditWindow extends ActionWindow {
-    public function __construct($view) {
+    public function __construct($view, $user) {
         $this->view = $view;
+        $this->user = $user;
     }
 
     public function getWindow() {
         $v = view('documents/edit-window.html');
         $inputs = '';
+        if (!$this->user->hasPermission('admin')) {
+            return 'Bạn không có quyền!';
+        }
         switch ($this->view) {
             case 'students':
                 $inputs .= Input::label('ID', ['class' => 'id-label']) . '<br>';
@@ -71,6 +75,19 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa nhật ký vi phạm');
+                break;
+            case 'users':
+                $inputs .= Input::label('ID', ['class' => 'id-label']) . '<br>';
+                $inputs .= Input::text('id', '', ['class' => 'edit-form id-form primary-form', 'autocomplete' => 'off']). '<br>';
+                $inputs .= Input::label('Tên (vui lòng không ghi kí tự đặc biệt)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('username', '', ['class' => 'edit-form username-form']). '<br>';
+                $inputs .= Input::label('Mật khẩu', ['class' => 'points-label']). '<br>';
+                $inputs .= Input::password('password', '', ['class'=> 'edit-form password-form no-auto-fill']). '<br>';
+                $inputs .= Input::label('Quyền (admin, supervisor, class_monitor)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('permission', '', ['class' => 'edit-form permission-form']). '<br>';
+                $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
+                $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $v = placeholder($v, 'window_title', 'Chỉnh sửa người dùng');
                 break;
     }
         $v = placeholder($v, 'form_content', $inputs);

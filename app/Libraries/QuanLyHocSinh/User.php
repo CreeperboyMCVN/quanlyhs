@@ -42,32 +42,12 @@ class User {
     public function getPermissions() {
         $query = $this->database->query('SELECT `permission` FROM `qlhs_users` WHERE `username`="'.$this->username.'"');
         //echo var_dump($query);
-        $arr = explode(',', $query->getFirstRow()->permission);
-        if (in_array('*', $arr)) {
-            return ['*' => '*'];
-        }
-        $res = [];
-        foreach ($arr as $value) {
-            $arr2 = explode("-", $value);
-            if (count($arr) == 1) {
-                $res = array_merge($res, [$arr2[0] => 'r']);
-            } else {
-                $res = array_merge($res, [$arr2[0] => $arr2[1]]);
-            }
-        }
-        return $res;
+        return $query->getFirstRow()->permission;
     }
 
-    public function hasPermission($perm, $rw):bool {
+    public function hasPermission($perm):bool {
         $perms = $this->getPermissions();
-        foreach ($perms as $k => $v) {
-            if ($k == '*') return true;
-            if ($k == $perm) {
-                
-                return ($v == $rw) || $v == '*';
-            }
-        }
-        return false;
+        return $perm == $perms;
     }
 
     public function getSideBar() {
@@ -77,11 +57,11 @@ class User {
     
     public function getViewWindow() {
         if (isset($_GET['edit'])) {
-            $aw = new EditWindow($this->view);
+            $aw = new EditWindow($this->view, $this);
         } else if (isset($_GET['import'])) {
-            $aw = new ImportWindow($this->view);
+            $aw = new ImportWindow($this->view, $this);
         } else {
-            $aw = new ListWindow($this->view);
+            $aw = new ListWindow($this->view, $this);
         }
         if (!isset($aw)) return '';
         return $aw->getWindow();

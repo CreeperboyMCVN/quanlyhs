@@ -9,13 +9,17 @@ use QuanLyHocSinh\Html\Text;
 
 class ImportWindow extends ActionWindow {
 
-    public function __construct($view) {
+    public function __construct($view, $user) {
         $this->view = $view;
+        $this->user = $user;
     }
 
     public function getWindow()
     {
         $v = view('documents/import-window.html');
+        if (!$this->user->hasPermission('admin')) {
+            return 'Bạn không có quyền!';
+        }
         $inputs = '';
         switch ($this->view) {
             case 'students':
@@ -58,6 +62,17 @@ class ImportWindow extends ActionWindow {
                 $inputs .= Input::number('points', '0', ['class'=> 'manual-form points-form']). '<br>';
                 $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
                 $v = placeholder($v, 'window_title', 'Nhập vi phạm');
+                break;
+            case 'users':
+                $inputs .= Text::header(3, 'Nhập thủ công', ['class' => 'form-header']);
+                $inputs .= Input::label('Tên (vui lòng không ghi kí tự đặc biệt)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('username', '', ['class' => 'manual-form username-form']). '<br>';
+                $inputs .= Input::label('Mật khẩu', ['class' => 'points-label']). '<br>';
+                $inputs .= Input::password('password', '', ['class'=> 'manual-form password-form']). '<br>';
+                $inputs .= Input::label('Quyền (admin, supervisor, class_monitor)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::text('permission', '', ['class' => 'manual-form permission-form']). '<br>';
+                $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
+                $v = placeholder($v, 'window_title', 'Nhập người dùng');
                 break;
             case 'log':
                 return 'Không thể nhập trực tiếp! Vui lòng dùng POS!';

@@ -1,11 +1,15 @@
 <?php
+
+use QuanLyHocSinh\User;
+
 header('Content-Type: application/json; charset=utf-8');
 if (!isset($_POST['token']) || !isset($_POST['username'])) {
     error(2);
 }
 $username = $_POST['username'];
+$user = new User($username);
 $token = $_POST['token'];
-if (!validSession($username, $token)) {
+if (!validSession($username, $token) || !$user->hasPermission('admin')) {
     error(2);
 }
 
@@ -41,7 +45,12 @@ $db = db_connect();
 $dat = '';
 foreach ($data as $key => $value) {
     # code...
-    $dat .= "`$key`='$value',";
+    if ($key == 'password') {
+        $pw = generatePassword($value);
+        $dat .= "`$key`='$pw',";
+    } else {
+        $dat .= "`$key`='$value',";
+    }
 }
 $dat = substr($dat, 0, strlen($dat)-1);
 

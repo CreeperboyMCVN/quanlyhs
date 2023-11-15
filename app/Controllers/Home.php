@@ -61,4 +61,8 @@ class Home extends BaseController
     public function record() {
         return view('record');
     }
+
+    public function mail() {
+        return view('mail');
+    }
 }

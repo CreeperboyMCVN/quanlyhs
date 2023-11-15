@@ -45,5 +45,10 @@ class Input {
         return '<input type="email" name="' . htmlspecialchars($name). '" value="'.htmlspecialchars($value
         ) .'" '. self::getAttributes($attr).'>';
     }
+
+    public static function password($name, $value = '', array $attr = []) {
+        return '<input type="password" name="' . htmlspecialchars($name). '" value="'.htmlspecialchars($value
+        ) .'" '. self::getAttributes($attr).'>';
+    }
 }
                     

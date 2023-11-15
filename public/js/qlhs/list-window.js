@@ -45,7 +45,11 @@ $('.download-btn').click(function (e) {
     $.post("./spreadsheet", data,
         function (data, textStatus, jqXHR) {
             if (data.code == 0) {
-                $('.download').attr('src', data.filename);
+                if (!isMobile()) {
+                    $('.download').attr('src', data.filename);
+                } else {
+                    window.location.href = data.filename;
+                }
             } else alert(data.message);
         },
         "json"
@@ -148,6 +152,9 @@ function table() {
                     }
                     if (keys[j] == 'gender') {
                         res += `<td>${gender(e)}</td>`
+                    }  else
+                    if (keys[j] == 'password') {
+
                     } else {
                         res += `<td>${e}</td>`;
                     }

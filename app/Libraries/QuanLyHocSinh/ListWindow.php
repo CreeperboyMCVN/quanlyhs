@@ -12,12 +12,16 @@ namespace QuanLyHocSinh;
 class ListWindow extends ActionWindow {
     //put your code here
 
-    public function __construct($view) {
+    public function __construct($view, $user) {
         $this->view = $view;
+        $this->user = $user;
     }
     
     public function getWindow() {
         $view = view('documents/action-list-window.html');
+        if (!$this->user->hasPermission('admin')) {
+            return 'Bạn không có quyền!';
+        }
         switch ($this->view) {
             case 'students':
                 # code...
@@ -44,6 +48,10 @@ class ListWindow extends ActionWindow {
                 $view = placeholder($view , 'filter_max', MAX_FORM);
                 $view = placeholder($view , 'filter_search', SEARCH_FORM);
                 $view = placeholder($view , 'filter_date', DATE_FORM);
+                return $view;
+            case 'users':
+                $view = placeholder($view , 'list_title', 'Danh sách người dùng');
+                $view = placeholder($view , 'filter_max', MAX_FORM);
                 return $view;
 
             default:

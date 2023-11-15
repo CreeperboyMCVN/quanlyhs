@@ -20,6 +20,10 @@ function resolveErrorCode($code) {
             return "Vui lòng điền đủ thông tin!";
         case 8:
             return "Thiếu giá trị trường chính";
+        case 9:
+            return "Thiếu dữ liệu";
+        case 10:
+            return "Dữ liệu sai định dạng";
         default:
             # code...
             return "Lỗi không xác định!";

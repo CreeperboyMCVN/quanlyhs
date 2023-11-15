@@ -73,3 +73,12 @@ $('.close-popup').click(function (e) {
     e.preventDefault();
     $('.popup').hide();
 });
+
+function isMobile() {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (e) {
+        return false;
+    }
+}

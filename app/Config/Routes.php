@@ -17,3 +17,4 @@ $routes->post('/data', 'Home::data');
 $routes->post('/import', 'Home::import');
 $routes->post('/edit', 'Home::edit');
 $routes->post('/record', 'Home::record');
+$routes->post('/mail', 'Home::mail');

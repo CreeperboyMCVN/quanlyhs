@@ -1,4 +1,7 @@
 <?php
+
+use QuanLyHocSinh\User;
+
 header('Content-Type: application/json; charset=utf-8');
 $response = [];
 if (!isset($_POST['secert']) || !isset($_POST['username']) || $_POST['secert'] == null || $_POST['username']==null) {
@@ -11,10 +14,14 @@ if (!isset($_POST['type']) || $_POST['type'] == null) {
 
 $secert = $_POST['secert'];
 $username = $_POST['username'];
+$user = new User($username);
 $type = $_POST['type'];
 
 if (!validSession($username, $secert)) {
     error(4);
+}
+if (!$user->hasPermission('class_monitor') && !$user->hasPermission('supervisor') && !$user->hasPermission('admin')) {
+    error(2);
 }
 $gb = isset($_POST['global_search']);
 $strict = isset($_POST['strict']);
@@ -75,6 +82,10 @@ switch ($type) {
         # code...
         $tableHeader = ['Mã nhật ký', 'Mã học sinh vi phạm', 'Mã vi phạm', 'Thời gian', 'Giám thị', 'Trừ điểm?'];
         $mainDateField = 'time';
+        break;
+    case 'users':
+        $tableHeader = ['ID', 'Tên đăng nhập', 'Quyền'];
+        $mainDateField = '';
         break;
     
     default:

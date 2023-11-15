@@ -1,10 +1,19 @@
 <?php
+
+use QuanLyHocSinh\User;
+
 if (!isset($_POST['username']) || !isset($_POST['token']) || !validSession($_POST['username'] , $_POST['token'])) {
     error(2);
 }
 
 if (!isset($_POST['view'])) {
     error(5);
+}
+
+$username = $_POST['username'];
+$user = new User($username);
+if (!$user->hasPermission('supervisor') || !$user->hasPermission('admin')) {
+    error(2);
 }
 
 $table = $_POST['view'];
@@ -21,17 +30,28 @@ if (isset($file) && !empty($file)) {
     //read all rows and columns from the spreadsheet into an array
     $first_row = true;
     $header = [];
+    $pwCol = -1;
     foreach ($worksheet->getRowIterator() as $row) {
         $cells = $row->getCellIterator();
         if ($first_row) {
             foreach ($cells as $key => $value) {
                 $header[] = '`'.$value->getValue().'`';
             }
+            if (array_search('`password`', $header)) {
+                $pwCol = array_search('`password`', $header);
+            }
             $first_row = false;
         } else {
             $data = [];
+            $i = 0;
             foreach ($cells as $key => $value) {
-                $data[] = "'$value'";
+                if ($i == $pwCol) {
+                    $pw = generatePassword($value);
+                    $data[] = "'$pw'";
+                } else {
+                    $data[] = "'$value'";
+                }
+                $i++;
             }
             $fields = join(', ', $header);
             $values = join(', ', $data);
@@ -54,12 +74,24 @@ if (isset($file) && !empty($file)) {
 } else {
     $arr = [];
     parse_str($_POST['data'], $arr);
+    $pwIdx = -1;
+    $pw = '';
+    $i = 0;
     foreach ($arr as $key => $value) {
         # code...
         if ($value == '') error(7);
+        if ($key == 'password') {
+            $pw = generatePassword($value);
+            $pwIdx = $i;
+        }
+        $i++;
+    }
+    $value = array_values($arr);
+    if ($pwIdx != -1) {
+        $value[$pwIdx] = $pw;
     }
     $fields = '`' . implode('`,`', array_keys($arr)) . '`';
-    $values = '\'' . implode('\',\'', array_values($arr)) . '\'';
+    $values = '\'' . implode('\',\'', $value) . '\'';
 
     $db = db_connect();
     $sql = "INSERT INTO `qlhs_$table` ($fields) VALUES ($values)";

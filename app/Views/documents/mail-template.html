@@ -1,0 +1,33 @@
+<style>
+table tr th {
+    background: #acabab;
+    text-align: center;
+}
+
+table, tr, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr.table-even {
+    background: #e2e1e1;
+}
+
+table tr.table-odd {
+    background: #d0cece;
+}
+</style>
+
+<p>Xin chào, ${teacher}!</p>
+<p>
+    Đây là sơ kết về việc thực hiện nội quy của lớp của thầy/cô trong thời gian ${time}. 
+    Những học sinh sau đây đã mắc các lỗi vi phạm
+</p>
+<table>
+    ${studentTable}
+</table>
+<p>Mong thầy/cô nhắc nhở học sinh trong lớp mình thực hiện tốt nội quy trong thời gian tiếp theo</p>
+<p>Cảm ơn.</p>

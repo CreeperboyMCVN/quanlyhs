@@ -50,22 +50,25 @@ foreach ($spreadsheet->getWorksheetIterator() as $worksheet) {
     }
 }
 */
+$debug = '';
 $worksheet = $spreadsheet->getActiveSheet();
 $cellItr = $worksheet->getRowIterator()->current()->getCellIterator();
 $cellItr->setIterateOnlyExistingCells(true);
 foreach($cellItr as $cell) {
     $worksheet->getColumnDimension($cell->getColumn())->setAutoSize(true);
-    $worksheet->getCell($cell->getCoordinate())->getStyle()->getAlignment()->setWrapText(true);
-    if ($worksheet->getColumnDimension($cell->getColumn())->getWidth() > 300) {
-        $worksheet->getColumnDimension($cell->getColumn())->setAutoSize(false);
-        $worksheet->getColumnDimension($cell->getColumn())->setWidth(300);
+    $width = $worksheet->getColumnDimension($cell->getColumn())->getWidth('px');
+    
+    $col = $worksheet->getColumnIterator($cell->getColumn(), $cell->getColumn())
+        ->current()->getCellIterator();
+    foreach ($col as $colCell) {
+        $worksheet->getCell($colCell->getCoordinate())->getStyle()
+            ->getAlignment()->setWrapText(true);
     }
 }
-
 
 
 $writer = new Xlsx($spreadsheet);
 $writer->save(config('App')->SpreadsheetsDir . $filename . '.xlsx');
 
 header('Content-Type: application/json; charset=utf-8');
-exit(json_encode(['code' => 0, 'filename' => config('App')->baseURL . config('App')->SpreadsheetsDir . $filename . '.xlsx', 'message' => 'Spreadsheet created successfully!']));
+exit(json_encode(['code' => 0, 'filename' => config('App')->baseURL . config('App')->SpreadsheetsDir . $filename . '.xlsx', 'message' => 'Spreadsheet created successfully!', 'debug' => $debug]));

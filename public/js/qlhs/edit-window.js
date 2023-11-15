@@ -4,9 +4,11 @@ $('.primary-form').on('input', function () {
     setTimeout(() => {
         let res = '';
         for (let i = 0; i<content.length; i++) {
-            if (i<5) res += `<div class="suggest-option" value="${content[i].id}">` + 
-            cutText(content[i].name, 20) + ' - ' + content[i].id + 
-            ' - ' + content[i].class + '</div>';
+            var contArr = Object.values(content[i]);
+            var contKey = Object.keys(content[i]);
+            if (i<5) res += `<div class="suggest-option" value="${content[i]['id']}">` + 
+            cutText(content[i]['name'], 20) + ' - ' + content[i]['id'] + 
+            ' - ' + (contKey[2] == 'password' ? 'Mật khẩu đã mã hóa' : contArr[2]) + '</div>';
         }
         $('.suggest-menu').html(res);
         if (content.length >0) applyValue(content[0]['id']) 
@@ -40,9 +42,11 @@ $('.primary-form').on('focus', function () {
     setTimeout(() => {
         let res = '';
         for (let i = 0; i<content.length; i++) {
-            if (i<5) res += `<div class="suggest-option" value="${content[i].id}">` + 
-            cutText(content[i].name, 20) + ' - ' + content[i].id + 
-            ' - ' + content[i].class + '</div>';
+            var contArr = Object.values(content[i]);
+            var contKey = Object.keys(content[i]);
+            if (i<5) res += `<div class="suggest-option" value="${content[i]['id']}">` + 
+            cutText(content[i]['name'], 20) + ' - ' + content[i]['id'] + 
+            ' - ' + (contKey[2] == 'password' ? 'Mật khẩu đã mã hóa' : contArr[2]) + '</div>';
         }
         $('.suggest-menu').html(res);
         if (content.length >0) applyValue(content[0]['id']) 
@@ -72,7 +76,7 @@ function applyValue(primary) {
                 br = false;
                 $('.edit-form').each(function (index, element) {
                     // element == this
-                    if (!$(this).hasClass('primary-form')) {
+                    if (!$(this).hasClass('primary-form') && !$(this).hasClass('no-auto-fill')) {
                         $(this).val(content[i][$(this).attr('name')]);
                         br = true;
                     }

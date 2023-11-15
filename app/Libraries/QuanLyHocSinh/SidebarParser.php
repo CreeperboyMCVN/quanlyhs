@@ -8,7 +8,8 @@ class SidebarParser extends Parser {
             'students'      => IconDictionary::$users . Utils::tag('span', ['function-item-label'], 'Danh sách học sinh'),
             'teachers'      => IconDictionary::$teacher . Utils::tag('span', ['function-item-label'], 'Danh sách giáo viên chủ nhiệm'),
             'violate'       => IconDictionary::$warning . Utils::tag('span', ['function-item-label'], 'Danh sách vi phạm'),
-            'log'           => IconDictionary::$checkcircle . Utils::tag('span', ['function-item-label'], 'Nhật ký vi phạm')
+            'log'           => IconDictionary::$checkcircle . Utils::tag('span', ['function-item-label'], 'Nhật ký vi phạm'),
+            'users'          => IconDictionary::$users . Utils::tag('span', ['function-item-label'], 'Người dùng')
         ];
         
         $user = $this->user;
@@ -17,7 +18,7 @@ class SidebarParser extends Parser {
         $itemClass = 'function-item';
         
         foreach ($actions as $key => $value) {
-            if ($user->hasPermission($key, 'r')) {
+            if ($user->hasPermission('admin')) {
                 $pageData = $user->getPageData();
                 $pageData["view"] = $key;
                 $url = current_url() . arrayToUrlFormEncoded($pageData);

@@ -236,7 +236,7 @@ $('.excel').click(function (e) {
         var vl = row[row.length -1];
         var vlText = '';
         vl.forEach(v1 => {
-            vlText += v1 + '; ';
+            vlText += v1 + '\n';
         });
         vlText = vlText.substring(0, vlText.length -1);
         row[row.length -1] = vlText;
@@ -250,10 +250,32 @@ $('.excel').click(function (e) {
     console.log(arr);
     $.post("./spreadsheet", data,
         function (data, textStatus, jqXHR) {
+            console.log(data);
             if (data.code == 0) {
-                $('.download').attr('src', data.filename);
+                if (!isMobile()) {
+                    $('.download').attr('src', data.filename);
+                } else {
+                    window.location.href = data.filename;
+                }
             } else alert(data.message);
         },
         "json"
+    );
+});
+
+$('.email').click(function (e) { 
+    e.preventDefault();
+    let dateStart = $('#date-start').val();
+    let dateEnd = $('#date-end').val();
+    let data = {
+        username: username,
+        token: secert,
+        dateEnd: dateEnd,
+        dateStart: dateStart
+    }
+    $.post("mail", data,
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+        }
     );
 });

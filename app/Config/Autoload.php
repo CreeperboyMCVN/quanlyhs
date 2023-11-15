@@ -47,6 +47,7 @@ class Autoload extends AutoloadConfig
         'Config'      => APPPATH . 'Config',
         'PhpOffice'   => ROOTPATH . 'vendor/phpoffice/phpspreadsheet/src',
         'QuanLyHocSinh' => APPPATH . 'Libraries/QuanLyHocSinh',
+        'PhpMailer'   => APPPATH . 'vendor/phpmailer/phpmailer/src'
     ];
 
     /**

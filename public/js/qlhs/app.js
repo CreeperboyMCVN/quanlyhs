@@ -141,3 +141,12 @@ function getParam(param) {
     }
     return "";
 }
+
+function isMobile() {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (e) {
+        return false;
+    }
+}

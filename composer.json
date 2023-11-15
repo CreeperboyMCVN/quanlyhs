@@ -5,6 +5,7 @@
     "license" : "Apache-2.0",
     "require": {
         "codeigniter4/framework": "^4.4",
-        "phpoffice/phpspreadsheet": "^1.29"
+        "phpoffice/phpspreadsheet": "^1.29",
+        "phpmailer/phpmailer": "^6.8"
     }
 }
