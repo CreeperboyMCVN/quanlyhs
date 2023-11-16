@@ -8,14 +8,18 @@
     <title>POS Vi Phạm</title>
 </head>
 <body>
-    <div class="popup" style="display: none;">
-        <div class="popup-content">
-          <h2 class="popup-title"></h2>
-          <p class="popup-message"></p>
-          <button class="close-popup">OK</button>
-        </div>
-      </div>
+    
     ${pos_content}
+    <div class="popup" style="display: none;">
+      <div class="popup-content">
+        <h2 class="popup-title"></h2>
+        <p class="popup-message"></p>
+        <button class="close-popup">OK</button>
+      </div>
+    </div>
+    <div class="loading-screen" style="display: none;">
+      <div class="title"><h2>Vui lòng chờ</h2></div>
+    </div>
 </body>
 <script src="./js/qlhs/pos.js"></script>
 <script src="${javascript_file}"></script>

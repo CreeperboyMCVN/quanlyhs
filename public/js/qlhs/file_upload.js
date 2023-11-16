@@ -35,6 +35,7 @@ Upload.prototype.doUpload = function () {
         success: function (data) {
             // your callback here
             if (data.code == 0) {
+                hideLoadingScreen();
                 popup('Thành công', 'Thao tác thành công');
             } else {
                 popup('Lỗi!', data.message);

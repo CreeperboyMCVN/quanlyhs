@@ -65,4 +65,8 @@ class Home extends BaseController
     public function mail() {
         return view('mail');
     }
+
+    public function about() {
+        return view('documents/khkt.html');
+    }
 }

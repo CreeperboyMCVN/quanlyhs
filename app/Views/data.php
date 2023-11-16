@@ -20,9 +20,7 @@ $type = $_POST['type'];
 if (!validSession($username, $secert)) {
     error(4);
 }
-if (!$user->hasPermission('class_monitor') && !$user->hasPermission('supervisor') && !$user->hasPermission('admin')) {
-    error(2);
-}
+
 $gb = isset($_POST['global_search']);
 $strict = isset($_POST['strict']);
 

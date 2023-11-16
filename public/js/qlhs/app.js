@@ -150,3 +150,11 @@ function isMobile() {
         return false;
     }
 }
+
+function showLoadingScreen() {
+    $('.loading-screen').show();
+}
+
+function hideLoadingScreen() {
+    $('.loading-screen').hide();
+}

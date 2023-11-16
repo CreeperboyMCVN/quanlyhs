@@ -24,6 +24,7 @@ $(document).ready(function () {
 
 $('.right-button').click(function (e) { 
     e.preventDefault();
+    showLoadingScreen();
     let studentid = $('#ma-hoc-sinh').val();
     let violateid = $('#loai-vi-pham').val();
     if (studentid == '' || violateid == '') {
@@ -63,6 +64,7 @@ $('.right-button').click(function (e) {
                             popup('Lỗi!', data.message);
                         }
                         $('#ma-hoc-sinh').val('');
+                        hideLoadingScreen();
                         updateSuggest();
                     }
                 );

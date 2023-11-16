@@ -69,7 +69,7 @@ class ImportWindow extends ActionWindow {
                 $inputs .= Input::text('username', '', ['class' => 'manual-form username-form']). '<br>';
                 $inputs .= Input::label('Mật khẩu', ['class' => 'points-label']). '<br>';
                 $inputs .= Input::password('password', '', ['class'=> 'manual-form password-form']). '<br>';
-                $inputs .= Input::label('Quyền (admin, supervisor, class_monitor)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::label('Quyền (admin, giamthi, gvcn, loptruong)', ['class' => 'name-label']). '<br>';
                 $inputs .= Input::text('permission', '', ['class' => 'manual-form permission-form']). '<br>';
                 $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
                 $v = placeholder($v, 'window_title', 'Nhập người dùng');

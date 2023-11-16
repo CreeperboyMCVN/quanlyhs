@@ -232,15 +232,14 @@ $('.excel').click(function (e) {
     arr.push(callback.tableHeader);
 
     record.forEach(v => {
-        var row = Object.values(v);
-        var vl = row[row.length -1];
+        var vl = v['violate'];
         var vlText = '';
         vl.forEach(v1 => {
             vlText += v1 + '\n';
         });
         vlText = vlText.substring(0, vlText.length -1);
-        row[row.length -1] = vlText;
-        arr.push(row);
+        v['violate'] = vlText;
+        arr.push(Object.values(v));
     })
 
     let data = {
@@ -265,6 +264,7 @@ $('.excel').click(function (e) {
 
 $('.email').click(function (e) { 
     e.preventDefault();
+    showLoadingScreen();
     let dateStart = $('#date-start').val();
     let dateEnd = $('#date-end').val();
     let data = {
@@ -275,7 +275,7 @@ $('.email').click(function (e) {
     }
     $.post("mail", data,
         function (data, textStatus, jqXHR) {
-            console.log(data);
+            hideLoadingScreen();
         }
     );
 });

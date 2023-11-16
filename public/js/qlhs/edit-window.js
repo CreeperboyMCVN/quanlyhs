@@ -131,6 +131,15 @@ function edit(action) {
                 primary: $('.primary-form').attr('name')+'-'+$('.primary-form').val(),
             }
             break;
+        case 'delete-all':
+            data = {
+                token: secert,
+                username: username,
+                view: view,
+                data: dat,
+                action: action,
+                primary: $('.primary-form').attr('name')+'-'+$('.primary-form').val(),
+            }
     }
     $.post("edit", data,
         function (data, textStatus, jqXHR) {
@@ -152,4 +161,9 @@ $('.edit-btn').on('click', function (e) {
 $('.delete-btn').on('click', function (e) {
     e.preventDefault();
     edit('delete');
+});
+
+$('.delete-all').on('click', function () {
+    //e.preventDefault();
+    edit('delete-all');
 });

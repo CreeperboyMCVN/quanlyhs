@@ -30,6 +30,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::text('class', '', ['class'=> 'edit-form class-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $inputs .= Input::button('Xóa toàn bộ' , ['class' => 'delete-all warning', 'type'=>'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa học sinh');
                 break;
             case 'teachers':
@@ -45,6 +46,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::text('team', '', ['class'=> 'edit-form team-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $inputs .= Input::button('Xóa toàn bộ' , ['class' => 'delete-all warning', 'type'=>'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa giáo viên chủ nhiệm');
                 break;
             case 'violate':
@@ -56,6 +58,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::text('points', '', ['class'=> 'edit-form points-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $inputs .= Input::button('Xóa toàn bộ' , ['class' => 'delete-all warning', 'type'=>'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa vi phạm');
                 break;
             case 'log':
@@ -74,6 +77,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::number('count', '0', ['class' => 'edit-form gender-form', 'min' => 0, 'max'=>1]). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $inputs .= Input::button('Xóa toàn bộ', ['class' => 'delete-all', 'type' => 'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa nhật ký vi phạm');
                 break;
             case 'users':
@@ -86,7 +90,7 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::label('Quyền (admin, supervisor, class_monitor)', ['class' => 'name-label']). '<br>';
                 $inputs .= Input::text('permission', '', ['class' => 'edit-form permission-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
-                $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning']);
+                $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning', 'type'=>'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa người dùng');
                 break;
     }

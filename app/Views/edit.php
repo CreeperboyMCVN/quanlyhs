@@ -9,7 +9,7 @@ if (!isset($_POST['token']) || !isset($_POST['username'])) {
 $username = $_POST['username'];
 $user = new User($username);
 $token = $_POST['token'];
-if (!validSession($username, $token) || !$user->hasPermission('admin')) {
+if (!validSession($username, $token)) {
     error(2);
 }
 
@@ -68,6 +68,17 @@ switch ($action) {
         break;
     case 'delete':
         $query = "DELETE FROM `qlhs_$table` WHERE $cond";
+        try {
+            $sql = $db->query($query);
+            $affR = $db->affectedRows();
+            die(json_encode(['code' => 0, 'message' => "Thành công, $affR dòng bị ảnh hưởng", 'query' => $query]));
+        } catch (\Throwable $e) {
+            die(json_encode(['code' => $e->getCode(), 'message' => $e->getMessage(), 'query' => $query
+            ]));
+        }
+        break;
+    case 'delete-all':
+        $query = "TRUNCATE TABLE `qlhs_$table`";
         try {
             $sql = $db->query($query);
             $affR = $db->affectedRows();

@@ -1,7 +1,7 @@
 $("#file").on("change", function (e) {
     var file = $(this)[0].files[0];
     var upload = new Upload(file);
-
+    showLoadingScreen();
     // maby check size or type here with upload.getSize() and upload.getType()
 
     // execute upload
@@ -32,6 +32,10 @@ function manualImport() {
                 popup('Lỗi', data.message);
             } else {
                 popup('Thành công', 'Thêm thành công');
+                $('.manual-form').each(function (index, element) {
+                    // element == this
+                    $(this).val('');
+                });
             }
         }
     );

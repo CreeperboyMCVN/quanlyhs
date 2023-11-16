@@ -58,13 +58,14 @@ switch ($type) {
                     "class" => $class,
                     "gender" => $gender,
                     "totalPoints" => $totalPts,
-                    "violate" => $violate
+                    "violate" => $violate,
+                    "rank" => xeploai($totalPts)
                 ]);
             }
             
         }
         die(json_encode(['code' => 0, 'message' => 'Thành công', 'data' => $record, 'tableHeader' 
-            => ['Tên', 'Lớp', 'Giới tính', 'Tổng điểm trừ', 'Vi phạm']]));
+            => ['Tên', 'Lớp', 'Giới tính', 'Tổng điểm trừ', 'Vi phạm', 'Xếp loại']]));
         break;
 
     case 'detail':
@@ -122,14 +123,28 @@ switch ($type) {
                     "class" => $class,
                     "gender" => $gender,
                     "totalPoints" => $totalPts,
-                    "violate" => $violate
+                    "violate" => $violate,
+                    "rank" => xeploai($totalPts)
                 ]);
             }
             
         }
         die(json_encode(['code' => 0, 'message' => 'Thành công', 'data' => $record, 'tableHeader' 
-            => ['Tên', 'Lớp', 'Giới tính', 'Tổng điểm trừ', 'Vi phạm'],
+            => ['Tên', 'Lớp', 'Giới tính', 'Tổng điểm trừ', 'Vi phạm', 'Xếp loại'],
             ]));
         break;
     
+}
+
+function xeploai($point) {
+    if ($point > 29) {
+        return 'Yếu';
+    } else if ($point > 19) {
+        return 'Trung bình';
+    } else if ($point > 9) {
+        return 'Khá';
+    
+    } else {
+        return 'Tôt';
+    }
 }

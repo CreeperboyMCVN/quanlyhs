@@ -12,7 +12,7 @@ if (!isset($_POST['view'])) {
 
 $username = $_POST['username'];
 $user = new User($username);
-if (!$user->hasPermission('supervisor') || !$user->hasPermission('admin')) {
+if (!$user->hasPermission('supervisor') && !$user->hasPermission('admin')) {
     error(2);
 }
 
