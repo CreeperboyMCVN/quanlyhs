@@ -122,7 +122,7 @@ function sendMail($reciever, String $subject = 'Default Subject', String $body =
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'quanlyhocsinhthptvk@gmail.com';                     //SMTP username
-        $mail->Password   = 'fuhtaylarjgkqcba';                               //SMTP password
+        $mail->Password   = '';                               //SMTP password
         $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
         $mail->Port       = 587;  
         $mail->CharSet    = 'UTF-8';
