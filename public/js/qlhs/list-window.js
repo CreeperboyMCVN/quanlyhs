@@ -152,9 +152,10 @@ function table() {
                     }
                     if (keys[j] == 'gender') {
                         res += `<td>${gender(e)}</td>`
-                    }  else
-                    if (keys[j] == 'password') {
+                    } else if (keys[j] == 'password') {
 
+                    } else if (keys[j] == 'status') {
+                        res += `<td>${stat(e)}</td>`;
                     } else {
                         res += `<td>${e}</td>`;
                     }

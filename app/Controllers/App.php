@@ -13,6 +13,8 @@ class App extends BaseController
                 delete_cookie('qlhs_user_token');
                 return redirect('/');
             }
+        } else {
+            return redirect('/');
         }
         
         //return view('app');

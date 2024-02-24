@@ -53,7 +53,12 @@ class ListWindow extends ActionWindow {
                 $view = placeholder($view , 'list_title', 'Danh sách người dùng');
                 $view = placeholder($view , 'filter_max', MAX_FORM);
                 return $view;
-
+            case 'login_log':
+                $view = placeholder($view , 'list_title', 'Lịch sử đăng nhập');
+                $view = placeholder($view , 'filter_max', MAX_FORM);
+                $view = placeholder($view , 'filter_search', SEARCH_FORM);
+                $view = placeholder($view , 'filter_date', DATE_FORM);
+                return $view;
             default:
                 # code...
                 break;

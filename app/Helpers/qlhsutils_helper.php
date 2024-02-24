@@ -24,6 +24,8 @@ function resolveErrorCode($code) {
             return "Thiếu dữ liệu";
         case 10:
             return "Dữ liệu sai định dạng";
+        case 11:
+            return "Không đủ quyền hạn, bạn phải là giám thị hoặc là admin";
         default:
             # code...
             return "Lỗi không xác định!";

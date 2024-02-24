@@ -158,3 +158,15 @@ function showLoadingScreen() {
 function hideLoadingScreen() {
     $('.loading-screen').hide();
 }
+
+function stat(code) {
+    switch (code) {
+        case "0":
+            return 'Thành công';
+        case "2":
+            return 'Từ chối truy cập';
+        default:
+            return 'Thành công';
+    }
+        
+}

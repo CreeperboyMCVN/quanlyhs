@@ -19,3 +19,4 @@ $routes->post('/edit', 'Home::edit');
 $routes->post('/record', 'Home::record');
 $routes->post('/mail', 'Home::mail');
 $routes->get('/info', 'Home::about');
+$routes->post('/record-spr', 'Home::recordSpreadsheet');

@@ -85,6 +85,10 @@ switch ($type) {
         $tableHeader = ['ID', 'Tên đăng nhập', 'Quyền'];
         $mainDateField = '';
         break;
+    case 'login_log':
+        $tableHeader = ['ID', 'Tên đăng nhập', 'Ngày đăng nhập', 'Trạng thái'];
+        $mainDateField = '';
+        break;
     
     default:
         # code...

@@ -69,13 +69,15 @@ class ImportWindow extends ActionWindow {
                 $inputs .= Input::text('username', '', ['class' => 'manual-form username-form']). '<br>';
                 $inputs .= Input::label('Mật khẩu', ['class' => 'points-label']). '<br>';
                 $inputs .= Input::password('password', '', ['class'=> 'manual-form password-form']). '<br>';
-                $inputs .= Input::label('Quyền (admin, giamthi, gvcn, loptruong)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::label('Quyền (admin, supervisor, teacher)', ['class' => 'name-label']). '<br>';
                 $inputs .= Input::text('permission', '', ['class' => 'manual-form permission-form']). '<br>';
                 $inputs .= Input::button('Nhập' , ['class' => 'manual-import-btn']);
                 $v = placeholder($v, 'window_title', 'Nhập người dùng');
                 break;
             case 'log':
                 return 'Không thể nhập trực tiếp! Vui lòng dùng POS!';
+            case 'login_log':
+                return 'Đây là bảng chỉ đọc, không thể nhập.';
         }
         
         $v = placeholder($v, 'form_content', $inputs);

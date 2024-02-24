@@ -22,13 +22,14 @@ $(document).ready(function () {
     );
 });
 
-$('.right-button').click(function (e) { 
+$('.submit-btn').click(function (e) { 
     e.preventDefault();
     showLoadingScreen();
     let studentid = $('#ma-hoc-sinh').val();
     let violateid = $('#loai-vi-pham').val();
     if (studentid == '' || violateid == '') {
         popup('Lỗi!', 'Vui lòng nhập đủ thông tin!');
+        hideLoadingScreen();
         return;
     }
     let data = {
@@ -42,6 +43,7 @@ $('.right-button').click(function (e) {
         function (data, textStatus, jqXHR) {
             if (data.data.length == 0) {
                 popup('Thông báo!', 'Học sinh với id đó không tồn tại!');
+                hideLoadingScreen();
                 return;
             } else {
                 let sendData = {

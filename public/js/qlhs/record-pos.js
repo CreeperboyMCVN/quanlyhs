@@ -247,7 +247,7 @@ $('.excel').click(function (e) {
         data: JSON.stringify(arr),
     }
     console.log(arr);
-    $.post("./spreadsheet", data,
+    $.post("./record-spr", data,
         function (data, textStatus, jqXHR) {
             console.log(data);
             if (data.code == 0) {
@@ -274,7 +274,14 @@ $('.email').click(function (e) {
         dateStart: dateStart
     }
     $.post("mail", data,
-        function (data, textStatus, jqXHR) {
+        function (dat, textStatus, jqXHR) {
+            if (dat.code) {
+                popup("Lỗi", dat.message);
+            } else if (dat.status != 0) {
+                popup("Lỗi", dat.message);
+            } else {
+                popup("Thành công", "Đã gửi mail cho giáo viên");
+            }
             hideLoadingScreen();
         }
     );

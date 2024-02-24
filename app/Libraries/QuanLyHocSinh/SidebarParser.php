@@ -9,7 +9,8 @@ class SidebarParser extends Parser {
             'teachers'      => IconDictionary::$teacher . Utils::tag('span', ['function-item-label'], 'Danh sách giáo viên chủ nhiệm'),
             'violate'       => IconDictionary::$warning . Utils::tag('span', ['function-item-label'], 'Danh sách vi phạm'),
             'log'           => IconDictionary::$checkcircle . Utils::tag('span', ['function-item-label'], 'Nhật ký vi phạm'),
-            'users'          => IconDictionary::$users . Utils::tag('span', ['function-item-label'], 'Người dùng')
+            'users'          => IconDictionary::$users . Utils::tag('span', ['function-item-label'], 'Người dùng'),
+            'login_log'          => IconDictionary::$key . Utils::tag('span', ['function-item-label'], 'Lịch sử đăng nhập')
         ];
         
         $user = $this->user;

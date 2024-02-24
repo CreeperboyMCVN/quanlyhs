@@ -2,11 +2,17 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
+use QuanLyHocSinh\User;
 header('Content-Type: application/json; charset=utf-8');
 
 if (!isset($_POST['username']) || !isset($_POST['token']) || !validSession($_POST['username'] , $_POST['token'])) {
     error(2);
+}
+
+$user = new User($_POST['username']);
+
+if (!$user->hasPermission('admin') && !$user->hasPermission('supervisor')) {
+    error(11);
 }
 
 $db = db_connect();
@@ -35,6 +41,7 @@ if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
 
 $mail_res = [];
 $error = false;
+$errmsg = '';
 $teachers = $db->query('SELECT * FROM `qlhs_teachers`')->getResult('array');
 foreach ($teachers as $value) {
     $dat = getLog($value['class'], $log_data);
@@ -63,7 +70,10 @@ foreach ($teachers as $value) {
         $subject = 'Sơ kết học sinh vi phạm';
         $body = $template;
         $res = sendMail($value['email'], $subject, $body);
-        if ($res['status'] == -1) $error = true;
+        if ($res['status'] == 'Failed') {
+            $errmsg = $res['message'];
+            $error = true;
+        }
         array_push($mail_res, $res);
     }
 }
@@ -71,7 +81,7 @@ foreach ($teachers as $value) {
 if (!$error) {
     exit(json_encode(['status'=> 0, 'mailData' => $mail_res, 'message' => 'Thành công!']));
 } else {
-    exit(json_encode(['status'=> -1, 'mailData' => $mail_res, 'message' => 'Thất bại!']));
+    exit(json_encode(['status'=> -1, 'mailData' => $mail_res, 'message' => 'Gửi thất bại!<br>'.$errmsg]));
 }
 
 function getLog($class, $log_data) : array {
@@ -130,7 +140,7 @@ function sendMail($reciever, String $subject = 'Default Subject', String $body =
     
         //Recipients
         $mail->setFrom('quanlyhocsinhthptvk@gmail.com', 'Hệ thống quản lý học sinh THPT Vĩnh Kim');
-        $mail->addAddress($reciever, 'Reciever');     //Add a recipient
+        $mail->addAddress($reciever, 'Teacher');     //Add a recipient
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML

@@ -5,7 +5,7 @@ use QuanLyHocSinh\InputPosWindow;
 
 if (isset(session()->username)) {
     $user = new User(session()->username);
-} else {
+} else if (isset($_COOKIE['qlhs_user_name'])){
     $user = new User($_COOKIE['qlhs_user_name']);
 }
 
@@ -36,8 +36,15 @@ if (isset($_GET['max'])) {
 //echo var_dump($user->getPermissions());
 
 
-$workframe = view('documents/workframe.html');
 $pos = view('documents/pos.html');
+//check permission
+if ($user->getPermissions() != "admin") {
+    $workframe = view('documents/no-permission.html');
+    $workframe = placeholder($workframe, 'main_page', base_url());
+} else {
+    $workframe = view('documents/workframe.html');
+}
+
 
 if ($user->window == 'workframe') {
     $workframe = placeholder($workframe, 'document_title', 'Test');
@@ -72,7 +79,12 @@ if ($user->window == 'pos') {
             break;
         default:
             $pos = placeholder($pos, 'pos_content', (new InputPosWindow($user))->getWindow());
+            $pos = placeholder($pos, 'base_url', base_url());
             $pos = placeholder($pos, 'javascript_file', './js/qlhs/input-pos.js');
+            if ($user->getPermissions() != "admin" && $user->getPermissions() != "supervisor") {
+                $pos = view('documents/no-permission.html');
+                $pos = placeholder($workframe, 'main_page', base_url());
+            }
             break;
     }
 }

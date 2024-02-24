@@ -12,4 +12,6 @@ class IconDictionary {
     public static $pen         = '<i class="fa-solid fa-pen"></i>';
     public static $question    = '<i class="fa-solid fa-question"></i>';
     public static $info        = '<i class="fa-solid fa-circle-info"></i>';
+    public static $key         = '<i class="fa-solid fa-key"></i>';
+    public static $logout      = '<i class="fa-solid fa-arrow-right-from-bracket"></i>';
 }

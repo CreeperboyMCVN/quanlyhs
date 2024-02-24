@@ -87,12 +87,14 @@ class EditWindow extends ActionWindow {
                 $inputs .= Input::text('username', '', ['class' => 'edit-form username-form']). '<br>';
                 $inputs .= Input::label('Mật khẩu', ['class' => 'points-label']). '<br>';
                 $inputs .= Input::password('password', '', ['class'=> 'edit-form password-form no-auto-fill']). '<br>';
-                $inputs .= Input::label('Quyền (admin, supervisor, class_monitor)', ['class' => 'name-label']). '<br>';
+                $inputs .= Input::label('Quyền (admin, supervisor, teacher)', ['class' => 'name-label']). '<br>';
                 $inputs .= Input::text('permission', '', ['class' => 'edit-form permission-form']). '<br>';
                 $inputs .= Input::button('Sửa' , ['class' => 'edit-btn']);
                 $inputs .= Input::button('Xóa' , ['class' => 'delete-btn warning', 'type'=>'button']);
                 $v = placeholder($v, 'window_title', 'Chỉnh sửa người dùng');
                 break;
+            case 'login_log':
+                return 'Đây là bảng chỉ đọc, không thể sửa.';
     }
         $v = placeholder($v, 'form_content', $inputs);
         return $v;

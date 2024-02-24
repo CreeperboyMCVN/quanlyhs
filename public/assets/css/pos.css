@@ -72,7 +72,12 @@ select {
     width: auto;
 }
 
-button {
+a.fake-button {
+    font-size: x-small;
+    text-decoration: none;
+}
+
+button, .fake-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -84,10 +89,21 @@ button {
 
 .right-button {
     float: right;
+    margin-left: 10px;
+}
+
+.warning-button {
+    background-color:  #aa0000;
+    color: white;
 }
 
 button:hover {
     background-color: #45a049;
+}
+
+.warning-button:hover {
+    background-color:  #790101;
+    color: white;
 }
 
 .suggest-container {
